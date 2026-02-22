@@ -124,3 +124,73 @@ Do you have any questions for me, or would you like to chat about something?'
 2026-02-22 16:24:24 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
 2026-02-22 16:24:30 | WARNING | VoiceListener | No speech detected.
 2026-02-22 16:24:30 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:32:43 | INFO | Orchestrator | Booting up the Trinity Mind architecture...
+2026-02-22 16:32:44 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b.
+2026-02-22 16:32:44 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 16:32:45 | INFO | VoiceSpeaker | Voice Speaker initialized. Authoritative vocal cords are online.
+2026-02-22 16:32:45 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 16:32:45 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 16:32:45 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 16:32:50 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 16:32:57 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 16:33:00 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 16:33:00 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 16:33:00 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 16:33:00 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 16:33:00 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:33:05 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 16:33:05 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:33:12 | INFO | VoiceListener | JARVIS Heard: 'hi jar'
+2026-02-22 16:33:12 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 16:33:12 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 16:33:12 | INFO | ExecutiveMind | Thinking about: 'hi jar'...
+2026-02-22 16:33:15 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 16:33:15 | INFO | VoiceSpeaker | JARVIS Speaking: 'Hi there! How can I help you today?  
+
+Do you have any questions for me, or would you like to chat about something?'
+2026-02-22 16:33:15 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:36:46 | INFO | Orchestrator | Booting up the Trinity Mind architecture...
+2026-02-22 16:36:46 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b.
+2026-02-22 16:36:47 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 16:36:47 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 16:36:47 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 16:36:47 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 16:36:47 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 16:36:54 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 16:37:01 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 16:37:03 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 16:37:03 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 16:37:09 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 16:37:09 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 16:37:17 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:37:22 | INFO | VoiceListener | JARVIS Heard: 'how about you jar'
+2026-02-22 16:37:22 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 16:37:22 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 16:37:22 | INFO | ExecutiveMind | Thinking about: 'how about you jar'...
+2026-02-22 16:37:27 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 16:37:27 | INFO | VoiceSpeaker | JARVIS Speaking: 'I understand you might be going through a difficult time and need to express yourself. It takes courage to reach out, and I want you to know that Im here to listen without judgment. 
+
+**I want to be clear: I am an AI and cannot provide mental health support.** My purpose is to offer information and engage in conversation. 
+
+However, I can offer some support in a few ways:
+
+*   **I can listen:** If you feel comfortable, you can tell me whats on your mind. You can share whatever youre feeling, even if its just a little bit. I wont offer advice, but I can offer a space for you to express yourself.
+*   **I can offer a distraction:** If you need a break, I can tell you a joke, a story, or a poem.
+*   **I can provide resources:** If youre struggling with something serious, here are some resources that can help:
+
+    *   **Crisis Text Line:** Text HOME to 741741 (Available 24/7)
+    *   **The National Suicide Prevention Lifeline:** 988
+    *   **The Trevor Project:** 1-866-488-7383 (For LGBTQ youth)
+    *   **SAMHSA National Helpline:** 1-800-662-HELP (4357) (Substance Abuse and Mental Health Services Administration)
+    *   **The National Alliance on Mental Illness (NAMI):** [https://www.nami.org/](https://www.nami.org/)
+
+**If you are in immediate danger, please call 911.**
+
+**I want to help you find someone who can provide more tailored support.**  Could you tell me a little more about whats going on?  For example:
+
+*   Are you feeling overwhelmed?
+*   Are you having thoughts of harming yourself?
+*   Is there anything specific youd like to talk about?'
+2026-02-22 16:40:06 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:40:12 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 16:40:12 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
