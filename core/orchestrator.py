@@ -26,8 +26,8 @@ vault = MemoryVault() # The memory vault is now online!
 def router_node(state: AgentState):
     user_input = state["messages"][-1].lower()
     
-    # We added "remember" and "recall" to the action triggers
-    action_triggers = ["time", "youtube", "search", "google", "open", "launch", "remember", "recall"]
+    # We added the new media keywords so the router knows to send them to the Action Engine
+    action_triggers = ["time", "youtube", "search", "google", "open", "launch", "turn on", "remember", "recall", "pause", "play", "skip", "next", "mute", "volume"]
     cloud_triggers = ["research", "explain", "summarize", "code", "analyze"]
     
     if any(keyword in user_input for keyword in action_triggers):
@@ -93,6 +93,10 @@ def action_node(state: AgentState):
         url = f"https://www.{site.replace(' ', '')}.com"
         response = hands.open_website(site, url)
         
+    elif any(word in user_input for word in ["pause", "play", "stop", "skip", "next", "previous", "back", "mute", "volume", "louder", "quieter"]):
+        # This will now perfectly catch "play music on Spotify" and trigger the Ghost Keyboard!
+        response = hands.control_media(user_input)
+            
     else:
         response = "I couldn't figure out exactly what action you wanted me to take, Boss."
         
