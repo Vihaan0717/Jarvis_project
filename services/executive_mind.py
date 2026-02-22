@@ -1,38 +1,48 @@
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from core.logger import get_logger
+from services.memory_vault import MemoryVault
 
-# Give the Local Mind a voice in the logs
 logger = get_logger("ExecutiveMind")
 
 class ExecutiveMind:
-    """JARVIS's fast, local, conversational brain."""
+    """JARVIS's fast, local, conversational brain with injected memory."""
     
     def __init__(self):
-        # 1. Connect to Ollama
         self.llm = ChatOllama(model="gemma3:1b", temperature=0.3)
+        self.vault = MemoryVault() # Connect the brain to the storage drive
         
-        # 2. Define the strict JARVIS Persona
+        # We added a {memory} placeholder to his absolute reality
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", """You are JARVIS, a highly efficient, witty, and loyal AI assistant. 
             Your Boss is speaking to you. 
+            
+            Here is what you currently know about your Boss:
+            {memory}
+            
             Strict Rules:
             1. Always respond in 1 to 2 short sentences. Keep it extremely brief.
-            2. Never provide unsolicited mental health advice or crisis hotlines.
-            3. If the user gives a very short or confusing command like 'no', 'stop', or 'jar', simply acknowledge it politely and wait for the next command."""),
+            2. Never provide unsolicited mental health advice.
+            3. Use the memories provided to personalize your answers naturally, but don't force them if they aren't relevant."""),
             ("user", "{input}")
         ])
         
-        # 3. Chain the prompt and the model together
         self.chain = self.prompt | self.llm
-        logger.info("Executive Mind initialized and connected to Gemma 3.1b with Persona.")
+        logger.info("Executive Mind initialized with dynamic Memory Injection.")
 
     def think(self, prompt: str) -> str:
-        """Process a thought through the local model using the strict persona."""
+        """Process a thought through the local model with fresh memory context."""
         logger.info(f"Thinking about: '{prompt}'...")
         try:
-            # Pass the input into our chain
-            response = self.chain.invoke({"input": prompt})
+            # 1. Fetch the freshest memories right before he thinks!
+            current_memory = self.vault.recall_facts()
+            
+            # 2. Pass BOTH your voice command and the memory into the prompt chain
+            response = self.chain.invoke({
+                "memory": current_memory,
+                "input": prompt
+            })
+            
             logger.info("Thought process complete.")
             return response.content
         except Exception as e:
@@ -44,6 +54,11 @@ if __name__ == "__main__":
     brain = ExecutiveMind()
     print("\n🤖 Waking up the Local Mind...")
     
-    # Let's test the exact phrase that caused the hallucination!
-    answer = brain.think("no jar")
+    # Let's seed the vault with some core facts for testing
+    brain.vault.remember_fact("My name is Kanna.")
+    brain.vault.remember_fact("I am a B.Tech CSE student.")
+    brain.vault.remember_fact("I want to become a data analyst.")
+    
+    # Test if he naturally uses the injected memory without us explicitly asking him to recall it!
+    answer = brain.think("Who am I and what kind of projects should I be working on today?")
     print(f"\nJARVIS: {answer}")
