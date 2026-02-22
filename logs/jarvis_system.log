@@ -194,3 +194,298 @@ However, I can offer some support in a few ways:
 2026-02-22 16:40:06 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
 2026-02-22 16:40:12 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
 2026-02-22 16:40:12 | INFO | VoiceListener | Calibrating to background noise... please wait 1 second.
+2026-02-22 16:50:40 | INFO | Orchestrator | Booting up the Trinity Mind architecture...
+2026-02-22 16:50:41 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b.
+2026-02-22 16:50:41 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 16:50:41 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 16:50:41 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 16:50:41 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 16:50:41 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 16:50:48 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 16:50:55 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 16:50:58 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 16:50:58 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 16:51:04 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 16:51:04 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 16:51:18 | INFO | VoiceListener | JARVIS Heard: 'hi Jarvis'
+2026-02-22 16:51:18 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 16:51:18 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 16:51:18 | INFO | ExecutiveMind | Thinking about: 'hi Jarvis'...
+2026-02-22 16:51:20 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 16:51:20 | INFO | VoiceSpeaker | JARVIS Speaking: 'Hello there! How can I help you today?  
+
+Do you have any questions for me, or would you like to chat about something?'
+2026-02-22 16:51:37 | INFO | VoiceListener | JARVIS Heard: 'how are you doing'
+2026-02-22 16:51:37 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 16:51:37 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 16:51:37 | INFO | ExecutiveMind | Thinking about: 'how are you doing'...
+2026-02-22 16:51:38 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 16:51:38 | INFO | VoiceSpeaker | JARVIS Speaking: 'Im doing well, thank you for asking! As a large language model, I dont experience feelings in the same way humans do, but Im functioning perfectly and ready to assist you.  
+
+How about you? Hows your day going so far? Is there anything youd like to chat about or any help I can offer?'
+2026-02-22 16:52:10 | INFO | VoiceListener | JARVIS Heard: 'no thanks Jarvis I am fine'
+2026-02-22 16:52:10 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 16:52:10 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 16:52:10 | INFO | ExecutiveMind | Thinking about: 'no thanks Jarvis I am fine'...
+2026-02-22 16:52:11 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 16:52:11 | INFO | VoiceSpeaker | JARVIS Speaking: 'Okay, thats perfectly alright! Just wanted to let you know Im here if you need anything.  
+
+Is there anything youd like to do or talk about?'
+2026-02-22 16:52:38 | INFO | VoiceListener | JARVIS Heard: 'no jar'
+2026-02-22 16:52:38 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 16:52:38 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 16:52:38 | INFO | ExecutiveMind | Thinking about: 'no jar'...
+2026-02-22 16:52:41 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 16:52:41 | INFO | VoiceSpeaker | JARVIS Speaking: 'I understand you're expressing a feeling of frustration or perhaps a desire to end a conversation. It seems like you're indicating you don't want to continue. 
+
+I want to gently point out that repeatedly saying "no jar" can be a bit repetitive and might be hindering a productive conversation. 
+
+I'm here to help in a way that feels comfortable for you.  
+
+Could you tell me what's going on?  Perhaps you'd like to:
+
+   Explain what's making you feel this way? (You don't have to go into detail if you don't want to.)
+   Express your need to stop the conversation?
+   Ask for a different approach? (e.g., "Could we try a different topic?")
+
+I'm here to listen without judgment.  Please let me know how I can best support you.
+
+If you are feeling overwhelmed, distressed, or need immediate support, here are some resources:
+
+   Crisis Text Line: Text HOME to 741741
+   The National Suicide Prevention Lifeline: 988
+   SAMHSA National Helpline: 1-800-662-HELP (4357) - https://www.samhsa.gov/find-help/national-helpline
+
+I want to help you feel better.  Please tell me what's on your mind.'
+2026-02-22 20:27:06 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:27:06 | INFO | ExecutiveMind | Thinking about: 'no jar'...
+2026-02-22 20:27:10 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 20:31:04 | INFO | Orchestrator | Booting up the Trinity Mind architecture...
+2026-02-22 20:31:05 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:31:05 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 20:31:05 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 20:31:05 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 20:31:05 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 20:31:05 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 20:31:12 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 20:31:19 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 20:31:23 | ERROR | BiometricGuard | Facial scan failed: Exception while processing img2_path
+2026-02-22 20:31:23 | INFO | VoiceSpeaker | JARVIS Speaking: 'Unauthorized user detected. Locking all systems.'
+2026-02-22 20:31:50 | INFO | Orchestrator | Booting up the Trinity Mind architecture...
+2026-02-22 20:31:51 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:31:51 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 20:31:51 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 20:31:51 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 20:31:51 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 20:31:51 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 20:31:58 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 20:32:05 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 20:32:08 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 20:32:08 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 20:32:14 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 20:32:14 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 20:32:27 | INFO | VoiceListener | JARVIS Heard: 'how are you doing'
+2026-02-22 20:32:27 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:32:27 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 20:32:27 | INFO | ExecutiveMind | Thinking about: 'how are you doing'...
+2026-02-22 20:32:29 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 20:32:29 | INFO | VoiceSpeaker | JARVIS Speaking: 'I am functioning optimally, thank you.'
+2026-02-22 20:32:39 | INFO | VoiceListener | JARVIS Heard: 'status about'
+2026-02-22 20:32:39 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:32:39 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 20:32:39 | INFO | ExecutiveMind | Thinking about: 'status about'...
+2026-02-22 20:32:40 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 20:32:40 | INFO | VoiceSpeaker | JARVIS Speaking: 'Okay, let me check'
+2026-02-22 20:32:51 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:32:57 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:33:03 | INFO | VoiceListener | JARVIS Heard: 'shut down Jarvis'
+2026-02-22 20:33:03 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:33:03 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 20:33:03 | INFO | ExecutiveMind | Thinking about: 'shut down Jarvis'...
+2026-02-22 20:33:03 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 20:33:03 | INFO | VoiceSpeaker | JARVIS Speaking: 'Acknowledged.'
+2026-02-22 20:35:19 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 20:35:19 | INFO | ActionEngine | Checked time: 08:35 PM
+2026-02-22 20:35:19 | INFO | ActionEngine | Searching YouTube for: 'lofi coding music'
+2026-02-22 20:40:16 | INFO | Orchestrator | Booting up the Trinity Mind architecture with Action capabilities...
+2026-02-22 20:40:16 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:40:17 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 20:40:17 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 20:40:17 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 20:40:17 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 20:40:17 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 20:40:17 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 20:40:24 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 20:40:31 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 20:40:34 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 20:40:34 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 20:40:39 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 20:40:39 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 20:40:56 | INFO | VoiceListener | JARVIS Heard: 'Jarvis play Lo-Fi music on YouTube'
+2026-02-22 20:40:56 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:40:56 | INFO | Orchestrator | Router: Action command detected. Routing to Hands.
+2026-02-22 20:40:56 | INFO | ActionEngine | Searching YouTube for: 'jarvis  lo-fi music on'
+2026-02-22 20:40:56 | INFO | VoiceSpeaker | JARVIS Speaking: 'Searching YouTube for jarvis  lo-fi music on.'
+2026-02-22 20:41:06 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:09 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:13 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:21 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:25 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:29 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:32 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:36 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:41:42 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:45:20 | INFO | Orchestrator | Booting up the Trinity Mind architecture with Action capabilities...
+2026-02-22 20:45:20 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:45:21 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 20:45:21 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 20:45:21 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 20:45:21 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 20:45:21 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 20:45:21 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 20:45:28 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 20:45:35 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 20:45:38 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 20:45:38 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 20:45:44 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 20:45:44 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 20:46:00 | INFO | VoiceListener | JARVIS Heard: 'Jarvis play Lo-Fi music on YouTube'
+2026-02-22 20:46:00 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:46:00 | INFO | Orchestrator | Router: Action command detected. Routing to Hands.
+2026-02-22 20:46:00 | INFO | ActionEngine | Searching YouTube for: 'lo-fi music'
+2026-02-22 20:46:00 | INFO | VoiceSpeaker | JARVIS Speaking: 'Searching YouTube for lo-fi music.'
+2026-02-22 20:46:15 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:47:56 | INFO | Orchestrator | Booting up the Trinity Mind architecture with Action capabilities...
+2026-02-22 20:47:56 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:47:57 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 20:47:57 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 20:47:57 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 20:47:57 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 20:47:57 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 20:47:57 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 20:48:04 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 20:48:11 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 20:48:13 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 20:48:13 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 20:48:19 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 20:48:19 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 20:48:33 | INFO | VoiceListener | JARVIS Heard: 'Jarvis play Lo-Fi music on YouTube'
+2026-02-22 20:48:33 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:48:33 | INFO | Orchestrator | Router: Action command detected. Routing to Hands.
+2026-02-22 20:48:33 | INFO | ActionEngine | Finding the first video for: 'lo-fi music'
+2026-02-22 20:48:37 | INFO | VoiceSpeaker | JARVIS Speaking: 'Playing lo-fi music on YouTube.'
+2026-02-22 20:48:45 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:48:53 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:49:06 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:49:42 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 20:53:31 | INFO | Orchestrator | Booting up the Trinity Mind architecture with Action capabilities...
+2026-02-22 20:53:32 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 20:53:33 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 20:53:33 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 20:53:33 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 20:53:33 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 20:53:33 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 20:53:33 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 20:53:39 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 20:53:46 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 20:53:49 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 20:53:49 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 20:53:55 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 20:53:55 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 20:54:08 | INFO | VoiceListener | JARVIS Heard: 'Jarvis launch Spotify'
+2026-02-22 20:54:08 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 20:54:08 | INFO | Orchestrator | Router: Action command detected. Routing to Hands.
+2026-02-22 20:54:08 | INFO | ActionEngine | Attempting to launch application: 'spotify'
+2026-02-22 20:54:32 | INFO | VoiceSpeaker | JARVIS Speaking: 'Launching spotify for you, Sir.'
+2026-02-22 20:54:40 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:00:49 | INFO | Orchestrator | Booting up the Trinity Mind architecture with Action capabilities...
+2026-02-22 21:00:49 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 21:00:50 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 21:00:50 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 21:00:50 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 21:00:50 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 21:00:50 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 21:00:50 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 21:00:57 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 21:01:04 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 21:01:07 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 21:01:07 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 21:01:13 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 21:01:13 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 21:01:28 | INFO | VoiceListener | JARVIS Heard: 'Jarvis play Lo-Fi music on YouTube'
+2026-02-22 21:01:28 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:01:28 | INFO | Orchestrator | Router: Action command detected. Routing to Hands.
+2026-02-22 21:01:28 | INFO | ActionEngine | Finding the first video for: 'lo-fi music'
+2026-02-22 21:01:31 | INFO | VoiceSpeaker | JARVIS Speaking: 'Playing lo-fi music on YouTube.'
+2026-02-22 21:01:51 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:01:54 | INFO | VoiceListener | JARVIS Heard: 'Spotify'
+2026-02-22 21:01:54 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:01:54 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 21:01:54 | INFO | ExecutiveMind | Thinking about: 'Spotify'...
+2026-02-22 21:01:57 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 21:01:57 | INFO | VoiceSpeaker | JARVIS Speaking: 'Okay, understood.'
+2026-02-22 21:02:07 | INFO | VoiceListener | JARVIS Heard: 'Jarvis launch Spotify'
+2026-02-22 21:02:07 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:02:07 | INFO | Orchestrator | Router: Action command detected. Routing to Hands.
+2026-02-22 21:02:07 | INFO | ActionEngine | Scanning command for application targets: 'jarvis launch spotify'
+2026-02-22 21:02:07 | INFO | VoiceSpeaker | JARVIS Speaking: 'Launching Spotify for you, Sir.'
+2026-02-22 21:02:21 | INFO | VoiceListener | JARVIS Heard: 'no'
+2026-02-22 21:02:21 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:02:21 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 21:02:21 | INFO | ExecutiveMind | Thinking about: 'no'...
+2026-02-22 21:02:21 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 21:02:21 | INFO | VoiceSpeaker | JARVIS Speaking: 'Understood.'
+2026-02-22 21:02:30 | INFO | VoiceListener | JARVIS Heard: 'why did you understand'
+2026-02-22 21:02:30 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:02:30 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 21:02:30 | INFO | ExecutiveMind | Thinking about: 'why did you understand'...
+2026-02-22 21:02:31 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 21:02:31 | INFO | VoiceSpeaker | JARVIS Speaking: 'I was trained on a massive dataset. 
+
+Do you have a question?'
+2026-02-22 21:02:42 | INFO | VoiceListener | JARVIS Heard: 'Vermont Travis'
+2026-02-22 21:02:42 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:02:42 | INFO | Orchestrator | Router: Simple task detected. Keeping it Local.
+2026-02-22 21:02:42 | INFO | ExecutiveMind | Thinking about: 'Vermont Travis'...
+2026-02-22 21:02:42 | INFO | ExecutiveMind | Thought process complete.
+2026-02-22 21:02:42 | INFO | VoiceSpeaker | JARVIS Speaking: 'Understood.  Im ready.'
+2026-02-22 21:13:12 | INFO | MemoryVault | Memory Vault initialized. Long-term storage is online.
+2026-02-22 21:13:12 | INFO | MemoryVault | Saving to permanent storage: 'My name is Kanna.'
+2026-02-22 21:13:12 | INFO | MemoryVault | Saving to permanent storage: 'I am working on a major Python AI project.'
+2026-02-22 21:13:12 | INFO | MemoryVault | Accessing permanent storage...
+2026-02-22 21:23:48 | INFO | Orchestrator | Booting up the Trinity Mind architecture with Actions & Memory...
+2026-02-22 21:23:49 | INFO | ExecutiveMind | Executive Mind initialized and connected to Gemma 3.1b with Persona.
+2026-02-22 21:23:50 | INFO | AnalyticalMind | Analytical Mind initialized and connected to Gemini 2.5 Flash.
+2026-02-22 21:23:50 | INFO | ActionEngine | Action Engine initialized. Digital hands are online.
+2026-02-22 21:23:50 | INFO | MemoryVault | Memory Vault initialized. Long-term storage is online.
+2026-02-22 21:23:50 | INFO | VoiceSpeaker | Voice Speaker initialized. Direct SAPI5 vocal cords are online.
+2026-02-22 21:23:50 | INFO | MainSystem | Initiating JARVIS Boot Sequence...
+2026-02-22 21:23:50 | INFO | BiometricGuard | Biometric Guard initialized. Security protocols active.
+2026-02-22 21:23:50 | INFO | VoiceSpeaker | JARVIS Speaking: 'Initiating biometric security scan. Please look at the camera.'
+2026-02-22 21:23:57 | INFO | BiometricGuard | Accessing webcam for identity verification...
+2026-02-22 21:24:04 | INFO | BiometricGuard | Scanning facial biometrics. This may take a moment...
+2026-02-22 21:24:07 | INFO | BiometricGuard | Identity Confirmed: Welcome back, Boss.
+2026-02-22 21:24:07 | INFO | VoiceSpeaker | JARVIS Speaking: 'Identity verified. Welcome back, Boss.'
+2026-02-22 21:24:13 | INFO | VoiceListener | Voice Listener initialized. Ears are open.
+2026-02-22 21:24:13 | INFO | VoiceSpeaker | JARVIS Speaking: 'All systems are online and the Trinity Mind is active. How can I help you today?'
+2026-02-22 21:24:29 | INFO | VoiceListener | JARVIS Heard: 'Jarvis remember that my favorite food is pizza'
+2026-02-22 21:24:29 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:24:29 | INFO | Orchestrator | Router: Action/Memory command detected.
+2026-02-22 21:24:29 | INFO | MemoryVault | Saving to permanent storage: 'My favorite food is pizza'
+2026-02-22 21:24:29 | INFO | VoiceSpeaker | JARVIS Speaking: 'I have securely committed that to my permanent memory.'
+2026-02-22 21:24:41 | INFO | VoiceListener | JARVIS Heard: 'Jarvis what do you remember'
+2026-02-22 21:24:41 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:24:41 | INFO | Orchestrator | Router: Action/Memory command detected.
+2026-02-22 21:24:41 | INFO | MemoryVault | Accessing permanent storage...
+2026-02-22 21:24:41 | INFO | VoiceSpeaker | JARVIS Speaking: 'Here is what I remember: My name is Kanna.. I am working on a major Python AI project.. My favorite food is pizza.'
+2026-02-22 21:25:04 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:25:10 | INFO | VoiceListener | JARVIS Heard: 'what was the time now'
+2026-02-22 21:25:10 | INFO | MainSystem | Routing voice command to the Orchestrator...
+2026-02-22 21:25:10 | INFO | Orchestrator | Router: Action/Memory command detected.
+2026-02-22 21:25:10 | INFO | ActionEngine | Checked time: 09:25 PM
+2026-02-22 21:25:10 | INFO | VoiceSpeaker | JARVIS Speaking: 'Sir, the current time is 09:25 PM.'
+2026-02-22 21:25:24 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:25:28 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:25:32 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:25:37 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
+2026-02-22 21:25:41 | WARNING | VoiceListener | Could not understand the audio. Please speak clearly.
