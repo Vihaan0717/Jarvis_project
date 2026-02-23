@@ -33,7 +33,7 @@ def boot_sequence(speaker):
     return True
 
 def foreground_loop(speaker, listener, background_brain):
-    """The Main Voice Loop (with multilingual toggle)"""
+    """The Main Voice Loop (with robust multilingual toggle)"""
     from services.multilingual_translator import MultilingualTranslator
     translator = MultilingualTranslator()
     
@@ -51,42 +51,45 @@ def foreground_loop(speaker, listener, background_brain):
         except queue.Empty:
             pass  
             
-        # Pass the current language code to the microphone!
         raw_input = listener.listen(language_code=current_language)
-        
-        if not raw_input:
-            continue
+        if not raw_input: continue
             
-        # 1. LANGUAGE TOGGLE COMMANDS (Always spoken in English to switch modes)
-        if "switch to telugu" in raw_input.lower():
+        # --- 1. TRANSLATE FIRST (If in foreign mode) ---
+        if current_language == "te-IN":
+            user_input = translator.translate_to_english(raw_input, "te")
+            if not user_input: continue
+        else:
+            user_input = raw_input
+            
+        # --- 2. PHONETIC OVERRIDE ---
+        # Catch all the weird ways the mic mishears your name!
+        user_input = user_input.lower().replace("javid", "jarvis").replace("javed", "jarvis").replace("jobs", "jarvis").replace("javez", "jarvis")
+        
+        # --- 3. ROBUST LANGUAGE TOGGLE ---
+        # Checks if "telugu" and any action word is in the sentence
+        if "telugu" in user_input and any(word in user_input for word in ["switch", "change", "speak"]):
             current_language = "te-IN"
             speaker.speak("I am now listening in Telugu, Boss.")
             continue
-        elif "switch to english" in raw_input.lower() or "english mode" in raw_input.lower():
+            
+        # Checks if "english" and any action word is in the sentence
+        elif "english" in user_input and any(word in user_input for word in ["switch", "change", "back", "mode"]):
             current_language = "en-IN"
             speaker.speak("Switching back to English.")
             continue
             
-        # 2. TRANSLATE FOREIGN INPUT TO ENGLISH
-        user_input = raw_input
-        if current_language == "te-IN":
-            # If he heard Telugu, he must translate it to English before thinking!
-            user_input = translator.translate_to_english(raw_input, "te")
-            if not user_input: continue
-            
-        # 3. NORMAL SHUTDOWN
-        if "sleep" in user_input.lower() or "power down" in user_input.lower():
+        # --- 4. NORMAL SHUTDOWN ---
+        if "sleep" in user_input or "power down" in user_input:
             speaker.speak("Powering down cognitive systems. Goodbye, Boss.")
             background_brain.stop() 
             break
             
-        # 4. ROUTE TO MASTER ORCHESTRATOR
+        # --- 5. ROUTE TO MASTER ORCHESTRATOR ---
         try:
             logger.info("Routing voice command to the Orchestrator...")
             state = jarvis_mind.invoke({"messages": [user_input]})
             response = state['final_response']
             
-            # If we are in Telugu mode, he should reply in Telugu!
             if current_language == "te-IN":
                 translator.translate_and_speak(response, "telugu")
             else:

@@ -32,7 +32,7 @@ def router_node(state: AgentState):
     user_input = state["messages"][-1].lower()
     
     # We added the new media keywords so the router knows to send them to the Action Engine
-    action_triggers = ["time", "youtube", "search", "google", "open", "launch", "turn on", "remember", "recall", "pause", "play", "skip", "next", "mute", "volume", "remind", "whatsapp", "message", "telugu", "hindi", "translate"]
+    action_triggers = ["time", "youtube", "search", "google", "open", "launch", "turn on", "remember", "recall", "pause", "play", "skip", "next", "mute", "volume", "remind", "whatsapp", "message", "telugu", "hindi", "translate", "check", "unread"]
     cloud_triggers = ["research", "explain", "summarize", "code", "analyze"]
     
     if any(keyword in user_input for keyword in action_triggers):
@@ -115,6 +115,9 @@ def action_node(state: AgentState):
             response = f"I have spoken the phrase in {target_lang.capitalize()}, Sir."
         else:
             response = "What would you like me to say in that language, Boss?"
+
+    elif "check" in user_input and ("message" in user_input or "unread" in user_input):
+        response = hands.check_unread_whatsapp()
 
     elif "whatsapp" in user_input or "message" in user_input:
         # 1. Identify the contact dynamically using a known list

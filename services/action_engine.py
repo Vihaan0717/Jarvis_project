@@ -5,7 +5,12 @@ import urllib.request
 import re
 import os
 import pyautogui # New: The Ghost Keyboard!
+import pytesseract
+from PIL import Image
 from core.logger import get_logger
+
+# Point Python to the Tesseract engine you just installed!
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 logger = get_logger("ActionEngine")
 
@@ -186,3 +191,88 @@ class ActionEngine:
         except Exception as e:
             logger.error(f"Comms automation failed: {e}")
             return "I encountered a critical error while operating the desktop interface."
+
+    def check_unread_whatsapp(self) -> str:
+        """Uses Computer Vision to find unread badges and pyperclip to read the text."""
+        import pyautogui
+        import time
+        import os
+        import pyperclip
+
+        logger.info("Initiating Incoming Comms Poller...")
+        try:
+            # 1. Pull up WhatsApp using the URI shortcut
+            logger.info("Opening WhatsApp...")
+            os.system("start whatsapp:")
+            time.sleep(2) # Give it a moment to render
+
+            # 2. Scan the screen for the green badge
+            logger.info("Visually scanning for unread_badge.png...")
+            try:
+                # We use locateCenterOnScreen so JARVIS knows exactly where to click
+                badge_location = pyautogui.locateCenterOnScreen('unread_badge.png', confidence=0.8)
+                
+                if badge_location:
+                    logger.info("Unread badge detected! Engaging...")
+                    pyautogui.click(badge_location)
+                    time.sleep(1) # Wait for the specific chat to load on the right side
+# 3. Focus and Auto-Scroll to the bottom
+                    time.sleep(1.5)
+                    screen_width, screen_height = pyautogui.size()
+                    
+                    # Click the "Type a message" box! 
+                    # This natively forces WhatsApp to scroll to the absolute newest message.
+                    # screen_height - 100 ensures we hit the text bar right above the Windows taskbar.
+                    pyautogui.click(badge_location.x + 400, screen_height - 100)
+                    time.sleep(1.5) # Give the smooth-scroll animation time to finish
+
+                    # 4. Take the MASSIVE screenshot with a wider lens
+                    # Move only 50px right of the badge to capture the extreme left edge of the chat!
+                    crop_x = int(badge_location.x + 50) 
+                    crop_y = 100 
+                    crop_w = int(screen_width - crop_x - 50)  
+                    crop_h = int(screen_height - 150) 
+                    
+                    logger.info("Taking screenshot...")
+                    chat_image = pyautogui.screenshot(region=(crop_x, crop_y, crop_w, crop_h))
+                    
+                    # --- THE AI VISION FILTER ---
+                    # Convert to grayscale and boost contrast by 300%
+                    from PIL import ImageEnhance
+                    gray_image = chat_image.convert('L')
+                    enhancer = ImageEnhance.Contrast(gray_image)
+                    clean_image = enhancer.enhance(3.0)
+                    
+                    # Save the cleaned image to verify the view!
+                    clean_image.save("debug_jarvis_eyes.png")
+                    
+                    # 5. Extract text from the screenshot using Tesseract OCR!
+                    logger.info("Extracting text via Optical Character Recognition...")
+                    extracted_text = pytesseract.image_to_string(chat_image)
+                    
+                    if extracted_text and extracted_text.strip():
+                        # Split into lines and remove empty spaces
+                        lines = [line.strip() for line in extracted_text.split('\n') if line.strip()]
+                        
+                        # Filter out garbage: timestamps (e.g., "4:32 pm"), UI buttons, and Date dividers
+                        garbage_words = ["type a message", "unread message", "search", "today", "yesterday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+                        
+                        valid_lines = [
+                            line for line in lines 
+                            if not re.match(r'^\d{1,2}:\d{2}\s*[aApP][mM]$', line) 
+                            and not any(garbage in line.lower() for garbage in garbage_words)
+                        ]
+                        
+                        if valid_lines:
+                            # The very last valid line of text on the screen is the newest message!
+                            last_msg = valid_lines[-1] 
+                            return f"You have a new message. It says: {last_msg}"
+                    
+                    return "I took a picture of the chat, but I couldn't find any readable text in the image."
+
+            except pyautogui.ImageNotFoundException:
+                return "I scanned the interface, Boss, but you have no new messages."
+
+        except Exception as e:
+            logger.error(f"Failed to execute incoming comms macro: {e}")
+            return "I encountered a critical error while trying to check your messages."
