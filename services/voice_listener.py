@@ -14,25 +14,24 @@ class VoiceListener:
         
         logger.info("Voice Listener initialized. Ears are open.")
 
-    def listen(self) -> str:
-        """Turns on the mic, listens for a command, and translates it to text."""
+    def listen(self, language_code: str = "en-IN") -> str:
+        """Turns on the mic, listens, and translates audio to text."""
         with sr.Microphone() as source:
-            # We removed the 1-second delay from here so he listens INSTANTLY!
-            print("\n🎙️ JARVIS is listening... Speak now!")
-            
+            print(f"\n🎙️ JARVIS is listening ({language_code})... Speak now!")
             try:
-                # We removed the phrase_time_limit so you can speak as long as you want
-                audio = self.recognizer.listen(source, timeout=8)
+                # We added a 5-second timeout so it doesn't hang if you are quiet
+                audio = self.recognizer.listen(source, timeout=5, phrase_time_limit=10)
                 print("Processing audio...")
                 
-                text = self.recognizer.recognize_google(audio)
-                logger.info(f"JARVIS Heard: '{text}'")
+                # We pass the specific language code to Google's Speech-to-Text engine
+                text = self.recognizer.recognize_google(audio, language=language_code)
+                # logger.info(f"JARVIS Heard ({language_code}): '{text}'")
                 return text
                 
             except sr.WaitTimeoutError:
                 return ""
             except sr.UnknownValueError:
-                logger.warning("Could not understand the audio. Please speak clearly.")
+                pass # Silently ignore background static
                 return ""
             except Exception as e:
                 logger.error(f"Microphone error: {e}")

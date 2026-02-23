@@ -49,8 +49,24 @@ class ActionEngine:
         command = command.lower()
         try:
             if "spotify" in command:
-                os.system("start spotify:") 
+                # The ultimate fallback: Use the Ghost Keyboard to search Windows!
+                import pyautogui
+                import time
+                pyautogui.press('win')
+                time.sleep(0.5) # Wait half a second for the menu to pop up
+                pyautogui.write('spotify')
+                time.sleep(0.5)
+                pyautogui.press('enter')
                 return "Launching Spotify."
+            elif "whatsapp" in command: # NEW BLOCK
+                import pyautogui
+                import time
+                pyautogui.press('win')
+                time.sleep(0.5)
+                pyautogui.write('whatsapp')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                return "Opening WhatsApp."
             elif "code" in command:
                 os.system("start code")
                 return "Launching Visual Studio Code."
@@ -99,3 +115,74 @@ class ActionEngine:
             return "Decreasing volume."
             
         return "I am not sure which media control you wanted to trigger, Sir."
+
+    def send_whatsapp_message(self, contact_name: str, message: str) -> str:
+        """Automates WhatsApp using Multi-Modal Launching and Computer Vision."""
+        import pyautogui
+        import time
+        import os
+        
+        logger.info(f"Initiating robust Comms Relay to {contact_name}...")
+        
+        valid_contacts = ["kanna", "mom", "friend", "nikhil"]
+        target_contact = None
+        for contact in valid_contacts:
+            if contact in contact_name.lower() or "karn" in contact_name.lower() and contact == "kanna":
+                target_contact = contact
+                break
+                
+        if not target_contact:
+            return f"I do not have a registered contact for {contact_name}, Sir."
+            
+        try:
+            # --- METHOD 1: Multi-Modal Launch Chain ---
+            logger.info("Attempting primary launch via URI protocol...")
+            # Try launching instantly via Windows URI
+            os.system("start whatsapp:") 
+            time.sleep(1) # Brief pause to let Windows react
+            
+            # --- METHOD 2: Visual Screen Monitoring ---
+            logger.info("Visually scanning monitor for WhatsApp interface...")
+            app_loaded = False
+            
+            # Instead of a blind sleep, JARVIS actively watches the screen for up to 15 seconds
+            for attempt in range(15): 
+                try:
+                    # He looks for the exact pixels of the screenshot you saved
+                    target = pyautogui.locateOnScreen('whatsapp_search.png', confidence=0.8)
+                    if target:
+                        logger.info("Visual confirmation: WhatsApp interface detected.")
+                        app_loaded = True
+                        break
+                except pyautogui.ImageNotFoundException:
+                    pass # Ignore if he doesn't see it yet
+                    
+                time.sleep(1) # Check the screen once per second
+                
+            if not app_loaded:
+                # Fallback to Taskbar Search if the URI failed and the screen is empty
+                logger.warning("Primary launch failed. Initiating Taskbar override...")
+                pyautogui.press('win')
+                time.sleep(0.5)
+                pyautogui.write('whatsapp')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(5) # Blind wait as an absolute last resort
+            
+            # --- METHOD 3: Execution ---
+            # Now that he *knows* the app is open, he executes the keystrokes
+            pyautogui.hotkey('ctrl', 'f')
+            time.sleep(1)
+            pyautogui.write(target_contact)
+            time.sleep(2) 
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.write(message)
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            
+            return f"Message successfully transmitted to {target_contact}."
+            
+        except Exception as e:
+            logger.error(f"Comms automation failed: {e}")
+            return "I encountered a critical error while operating the desktop interface."
