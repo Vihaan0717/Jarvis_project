@@ -220,11 +220,15 @@ class ActionEngine:
                     time.sleep(1.5)
                     screen_width, screen_height = pyautogui.size()
                     
-                    # Click the "Type a message" box! 
-                    # This natively forces WhatsApp to scroll to the absolute newest message.
-                    # screen_height - 100 ensures we hit the text bar right above the Windows taskbar.
-                    pyautogui.click(badge_location.x + 400, screen_height - 100)
-                    time.sleep(1.5) # Give the smooth-scroll animation time to finish
+                    # Click lower to hit the "Type a message" box (changed from -100 to -60)
+                    pyautogui.click(badge_location.x + 400, screen_height - 60)
+                    time.sleep(1.0) 
+
+                    # --- THE MOUSE FLICK ---
+                    # Move the mouse to the top-left corner of the screen!
+                    # This guarantees we aren't hovering over any messages, hiding the emoji popups!
+                    pyautogui.moveTo(10, 10)
+                    time.sleep(0.5) # Give WhatsApp half a second to hide the hover menu
 
                     # 4. Take the MASSIVE screenshot with a wider lens
                     # Move only 50px right of the badge to capture the extreme left edge of the chat!
@@ -264,9 +268,31 @@ class ActionEngine:
                         ]
                         
                         if valid_lines:
-                            # The very last valid line of text on the screen is the newest message!
-                            last_msg = valid_lines[-1] 
-                            return f"You have a new message. It says: {last_msg}"
+                            raw_msg = valid_lines[-1] 
+                            
+                            # --- OCR TIME EXTRACTOR & SCRUBBER ---
+                            # Search for anything that looks like a time at the end of the string
+                            # This catches "9:53 am", "11:03 pm", but also botches like "o.534m"
+                            time_match = re.search(r'([0-9oO]{1,2}[:.][0-9oO]{2}\s*[aApP4]?[mM]?)[\s@a-zA-Z]*$', raw_msg)
+                            
+                            if time_match:
+                                # 1. Extract the messy time string
+                                messy_time = time_match.group(1)
+                                
+                                # 2. Clean up the actual text message by slicing off the time and trailing emojis/@ symbols
+                                clean_msg = raw_msg[:time_match.start()].strip()
+                                
+                                # 3. Auto-correct the OCR hallucinations in the timestamp!
+                                # Convert 'o' to '0', '.' to ':', and fix '4m' back to 'am'
+                                clean_time = messy_time.replace('o', '0').replace('O', '0').replace('.', ':').replace('4m', 'am')
+                                
+                                # Ensure there is a space before am/pm so JARVIS reads it naturally
+                                clean_time = re.sub(r'([aApP][mM])', r' \1', clean_time).strip()
+                                
+                                return f"You have a new message. It says: {clean_msg}. It was received at {clean_time}."
+                            else:
+                                # Fallback: If no time was found, just read the message normally
+                                return f"You have a new message. It says: {raw_msg.strip()}"
                     
                     return "I took a picture of the chat, but I couldn't find any readable text in the image."
 
