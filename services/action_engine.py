@@ -4,9 +4,11 @@ import urllib.parse
 import urllib.request
 import re
 import os
-import pyautogui # New: The Ghost Keyboard!
+import time
+import pyautogui
 import pytesseract
 from PIL import Image
+from PIL import ImageEnhance
 from core.logger import get_logger
 
 # Point Python to the Tesseract engine you just installed!
@@ -55,17 +57,13 @@ class ActionEngine:
         try:
             if "spotify" in command:
                 # The ultimate fallback: Use the Ghost Keyboard to search Windows!
-                import pyautogui
-                import time
                 pyautogui.press('win')
                 time.sleep(0.5) # Wait half a second for the menu to pop up
                 pyautogui.write('spotify')
                 time.sleep(0.5)
                 pyautogui.press('enter')
                 return "Launching Spotify."
-            elif "whatsapp" in command: # NEW BLOCK
-                import pyautogui
-                import time
+            elif "whatsapp" in command: 
                 pyautogui.press('win')
                 time.sleep(0.5)
                 pyautogui.write('whatsapp')
@@ -122,12 +120,12 @@ class ActionEngine:
         return "I am not sure which media control you wanted to trigger, Sir."
 
     def send_whatsapp_message(self, contact_name: str, message: str) -> str:
-        """Automates WhatsApp using Multi-Modal Launching and Computer Vision."""
+        """Automates WhatsApp using Computer Vision to verify UI state before typing."""
         import pyautogui
         import time
         import os
         
-        logger.info(f"Initiating robust Comms Relay to {contact_name}...")
+        logger.info(f"Initiating Vision-Based Comms Relay to {contact_name}...")
         
         valid_contacts = ["kanna", "mom", "friend", "nikhil"]
         target_contact = None
@@ -140,48 +138,59 @@ class ActionEngine:
             return f"I do not have a registered contact for {contact_name}, Sir."
             
         try:
-            # --- METHOD 1: Multi-Modal Launch Chain ---
-            logger.info("Attempting primary launch via URI protocol...")
-            # Try launching instantly via Windows URI
+            # 1. Launch WhatsApp
+            logger.info("Launching WhatsApp via URI...")
             os.system("start whatsapp:") 
-            time.sleep(1) # Brief pause to let Windows react
             
-            # --- METHOD 2: Visual Screen Monitoring ---
-            logger.info("Visually scanning monitor for WhatsApp interface...")
-            app_loaded = False
-            
-            # Instead of a blind sleep, JARVIS actively watches the screen for up to 15 seconds
-            for attempt in range(15): 
+            # 2. Wait for the Search Bar to visually appear (Max 10 seconds)
+            logger.info("Visually scanning for the Search Bar...")
+            search_bar_location = None
+            for _ in range(10):
                 try:
-                    # He looks for the exact pixels of the screenshot you saved
-                    target = pyautogui.locateOnScreen('whatsapp_search.png', confidence=0.8)
-                    if target:
-                        logger.info("Visual confirmation: WhatsApp interface detected.")
-                        app_loaded = True
+                    # Looking for the magnifying glass icon or the search box itself
+                    search_bar_location = pyautogui.locateCenterOnScreen('whatsapp_search.png', confidence=0.8)
+                    if search_bar_location:
                         break
                 except pyautogui.ImageNotFoundException:
-                    pass # Ignore if he doesn't see it yet
-                    
-                time.sleep(1) # Check the screen once per second
+                    pass
+                time.sleep(1)
                 
-            if not app_loaded:
-                # Fallback to Taskbar Search if the URI failed and the screen is empty
-                logger.warning("Primary launch failed. Initiating Taskbar override...")
-                pyautogui.press('win')
-                time.sleep(0.5)
-                pyautogui.write('whatsapp')
-                time.sleep(0.5)
-                pyautogui.press('enter')
-                time.sleep(5) # Blind wait as an absolute last resort
+            if not search_bar_location:
+                return "I could not visually confirm WhatsApp loaded, Boss. Aborting to prevent misfires."
+
+            # 3. Click the Search Bar and Type the Contact
+            logger.info("Search bar confirmed. Entering target contact...")
+            pyautogui.click(search_bar_location)
+            time.sleep(0.5)
             
-            # --- METHOD 3: Execution ---
-            # Now that he *knows* the app is open, he executes the keystrokes
-            pyautogui.hotkey('ctrl', 'f')
-            time.sleep(1)
+            # Clear any old searches just in case
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.press('backspace')
+            
             pyautogui.write(target_contact)
-            time.sleep(2) 
-            pyautogui.press('enter')
-            time.sleep(1)
+            time.sleep(1.5) # Give WhatsApp a moment to filter the contact list
+            pyautogui.press('enter') # Open the chat
+            
+            # 4. Verify the Chat Opened by looking for the Text Input area
+            # We look for the little microphone or paperclip icon next to the text box
+            logger.info("Verifying chat window is active...")
+            chat_active = False
+            for _ in range(5):
+                try:
+                    # We need a small picture of the paperclip/plus icon or mic icon next to the chat bar
+                    chat_box = pyautogui.locateCenterOnScreen('whatsapp_input_anchor.png', confidence=0.8)
+                    if chat_box:
+                        chat_active = True
+                        break
+                except pyautogui.ImageNotFoundException:
+                    pass
+                time.sleep(1)
+                
+            if not chat_active:
+                return "I selected the contact, but the chat window failed to open properly."
+                
+            # 5. Type and Send!
+            logger.info("Chat window verified. Transmitting payload...")
             pyautogui.write(message)
             time.sleep(0.5)
             pyautogui.press('enter')
@@ -193,12 +202,7 @@ class ActionEngine:
             return "I encountered a critical error while operating the desktop interface."
 
     def check_unread_whatsapp(self) -> str:
-        """Uses Computer Vision to find unread badges and pyperclip to read the text."""
-        import pyautogui
-        import time
-        import os
-        import pyperclip
-
+        """Uses Computer Vision to find unread badges and pytesseract to read the text and time."""
         logger.info("Initiating Incoming Comms Poller...")
         try:
             # 1. Pull up WhatsApp using the URI shortcut
@@ -209,56 +213,67 @@ class ActionEngine:
             # 2. Scan the screen for the green badge
             logger.info("Visually scanning for unread_badge.png...")
             try:
-                # We use locateCenterOnScreen so JARVIS knows exactly where to click
-                badge_location = pyautogui.locateCenterOnScreen('unread_badge.png', confidence=0.8)
+                badge_location = pyautogui.locateCenterOnScreen('unread_badge.png', confidence=0.7, grayscale=True)
                 
                 if badge_location:
                     logger.info("Unread badge detected! Engaging...")
-                    pyautogui.click(badge_location)
-                    time.sleep(1) # Wait for the specific chat to load on the right side
-# 3. Focus and Auto-Scroll to the bottom
-                    time.sleep(1.5)
+                    
+                    # --- NEW: STEP 2.5 - EXTRACT THE EXACT TIME BEFORE CLICKING ---
+                    # The time is located exactly above and slightly left of the green badge!
+                    t_x = int(badge_location.x - 50)
+                    t_y = int(badge_location.y - 35)
+                    t_w = 75
+                    t_h = 25
+                    
+                    time_image = pyautogui.screenshot(region=(t_x, t_y, t_w, t_h))
+                    
+                    # AI TRICK: Upscale the tiny image by 300% so Tesseract can easily read the small font
+                    time_image = time_image.resize((t_w * 3, t_h * 3))
+                    time_image = time_image.convert('L')
+                    
+                    # Save it so YOU can see his "Time Eyes"
+                    time_image.save("debug_time_eyes.png")
+                    
+                    # Extract the time, using --psm 7 to tell Tesseract it's a single line of text
+                    raw_time = pytesseract.image_to_string(time_image, config='--psm 7').strip()
+                    
+                    # Clean it up: find the actual numbers and am/pm
+                    time_match = re.search(r'\d{1,2}[:.]\d{2}\s*[aApP][mM]', raw_time)
+                    exact_time = time_match.group(0).replace('.', ':') if time_match else "an unknown time"
+                    
+                    # --------------------------------------------------------------
+
+                    # 3. Focus and Auto-Scroll to the bottom
+                    time.sleep(0.5)
                     screen_width, screen_height = pyautogui.size()
                     
-                    # Click lower to hit the "Type a message" box (changed from -100 to -60)
                     pyautogui.click(badge_location.x + 400, screen_height - 60)
                     time.sleep(1.0) 
-
-                    # --- THE MOUSE FLICK ---
-                    # Move the mouse to the top-left corner of the screen!
-                    # This guarantees we aren't hovering over any messages, hiding the emoji popups!
+                    
+                    # The Mouse Flick to hide emojis
                     pyautogui.moveTo(10, 10)
-                    time.sleep(0.5) # Give WhatsApp half a second to hide the hover menu
+                    time.sleep(0.5)
 
-                    # 4. Take the MASSIVE screenshot with a wider lens
-                    # Move only 50px right of the badge to capture the extreme left edge of the chat!
+                    # 4. Take the MASSIVE screenshot of the chat text
                     crop_x = int(badge_location.x + 50) 
                     crop_y = 100 
                     crop_w = int(screen_width - crop_x - 50)  
                     crop_h = int(screen_height - 150) 
                     
-                    logger.info("Taking screenshot...")
+                    logger.info("Taking screenshot of message payload...")
                     chat_image = pyautogui.screenshot(region=(crop_x, crop_y, crop_w, crop_h))
                     
-                    # --- THE AI VISION FILTER ---
                     # Convert to grayscale and boost contrast by 300%
-                    from PIL import ImageEnhance
                     gray_image = chat_image.convert('L')
                     enhancer = ImageEnhance.Contrast(gray_image)
                     clean_image = enhancer.enhance(3.0)
-                    
-                    # Save the cleaned image to verify the view!
                     clean_image.save("debug_jarvis_eyes.png")
-                    
-                    # 5. Extract text from the screenshot using Tesseract OCR!
-                    logger.info("Extracting text via Optical Character Recognition...")
-                    extracted_text = pytesseract.image_to_string(chat_image)
+
+                    # 5. Extract text from the cleaned screenshot
+                    extracted_text = pytesseract.image_to_string(clean_image)
                     
                     if extracted_text and extracted_text.strip():
-                        # Split into lines and remove empty spaces
                         lines = [line.strip() for line in extracted_text.split('\n') if line.strip()]
-                        
-                        # Filter out garbage: timestamps (e.g., "4:32 pm"), UI buttons, and Date dividers
                         garbage_words = ["type a message", "unread message", "search", "today", "yesterday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
                         
                         valid_lines = [
@@ -270,31 +285,13 @@ class ActionEngine:
                         if valid_lines:
                             raw_msg = valid_lines[-1] 
                             
-                            # --- OCR TIME EXTRACTOR & SCRUBBER ---
-                            # Search for anything that looks like a time at the end of the string
-                            # This catches "9:53 am", "11:03 pm", but also botches like "o.534m"
-                            time_match = re.search(r'([0-9oO]{1,2}[:.][0-9oO]{2}\s*[aApP4]?[mM]?)[\s@a-zA-Z]*$', raw_msg)
+                            # Scrub off any leftover hallucinated time/emojis from the end of the text
+                            clean_msg = re.sub(r'\s+[\d:oO.]+\s*[aApP]?\w*[@]?$', '', raw_msg).strip()
                             
-                            if time_match:
-                                # 1. Extract the messy time string
-                                messy_time = time_match.group(1)
-                                
-                                # 2. Clean up the actual text message by slicing off the time and trailing emojis/@ symbols
-                                clean_msg = raw_msg[:time_match.start()].strip()
-                                
-                                # 3. Auto-correct the OCR hallucinations in the timestamp!
-                                # Convert 'o' to '0', '.' to ':', and fix '4m' back to 'am'
-                                clean_time = messy_time.replace('o', '0').replace('O', '0').replace('.', ':').replace('4m', 'am')
-                                
-                                # Ensure there is a space before am/pm so JARVIS reads it naturally
-                                clean_time = re.sub(r'([aApP][mM])', r' \1', clean_time).strip()
-                                
-                                return f"You have a new message. It says: {clean_msg}. It was received at {clean_time}."
-                            else:
-                                # Fallback: If no time was found, just read the message normally
-                                return f"You have a new message. It says: {raw_msg.strip()}"
-                    
-                    return "I took a picture of the chat, but I couldn't find any readable text in the image."
+                            # Combine the cleanly scrubbed message with the exact time we read earlier!
+                            return f"You have a new message. It says: {clean_msg}. It was received at {exact_time}."
+                
+                return "I took a picture of the chat, but I couldn't find any readable text in the image."
 
             except pyautogui.ImageNotFoundException:
                 return "I scanned the interface, Boss, but you have no new messages."
