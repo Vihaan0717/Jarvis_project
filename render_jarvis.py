@@ -66,6 +66,8 @@ def webhook_handler():
         if telegram_app and telegram_loop:
             # Spawn background thread to process so we can return 200 OK instantly
             threading.Thread(target=process_background_update, args=(update_data,), daemon=True).start()
+        else:
+            print("❌ ERROR: Webhook received, but Telegram Bot is NOT initialized! Did you set the TELEGRAM_BOT_TOKEN in Render?")
             
         return "OK", 200
     except Exception as e:
