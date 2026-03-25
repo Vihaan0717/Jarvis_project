@@ -1,7 +1,7 @@
 import os
 import asyncio
 import threading
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 from dotenv import load_dotenv
@@ -17,7 +17,7 @@ MY_USER_ID = int(os.getenv("MY_USER_ID", "0"))
 telegram_app = None
 telegram_loop = None
 
-# --- JOB QUEUE (Simple List) ---
+# --- JOB QUEUE (Memory-based) ---
 pending_jobs = []
 
 # --- FLASK SERVER (Health Check & Bridge API) ---
@@ -29,11 +29,17 @@ def health_check():
 
 @app.route('/get_jobs', methods=['GET'])
 def get_jobs():
-    """Returns all current jobs and clears the queue."""
+    """Returns the list of pending tasks and immediately clears them."""
     global pending_jobs
+    
+    # 1. Grab current tasks
     jobs_to_send = list(pending_jobs)
+    
+    # 2. CLEAR the queue immediately
     pending_jobs.clear()
-    return jobs_to_send, 200
+    
+    # Use jsonify for proper JSON response formatting
+    return jsonify(jobs_to_send)
 
 @app.route('/complete_job', methods=['POST'])
 def complete_job():
@@ -47,7 +53,7 @@ def complete_job():
             telegram_app.bot.send_message(chat_id=MY_USER_ID, text=msg),
             telegram_loop
         )
-    return {"status": "success"}, 200
+    return jsonify({"status": "success"})
 
 # --- TELEGRAM BOT LOGIC ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -62,11 +68,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     user_text = update.message.text
+    global pending_jobs
     pending_jobs.append(user_text)
+    
+    print(f"📥 Queued command: {user_text}")
     await update.message.reply_text(f"Command Queued: {user_text}")
 
 def run_flask():
     """Starts the Flask server."""
+    # Note: Render provides PORT env var
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
 
@@ -89,10 +99,14 @@ async def main_bot():
     await telegram_app.start()
     await telegram_app.updater.start_polling()
     
+    # Keep alive
     while True:
         await asyncio.sleep(3600)
 
 if __name__ == "__main__":
+    # Start Flask in a background thread
     flask_thread = threading.Thread(target=run_flask, daemon=True)
     flask_thread.start()
+    
+    # Run Telegram Bot in the main loop
     asyncio.run(main_bot())
