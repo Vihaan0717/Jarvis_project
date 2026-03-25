@@ -12,8 +12,10 @@ from dotenv import load_dotenv
 # Load environment variables (for API Key)
 load_dotenv()
 
-# --- CONFIGURATION (HARDCODED AS REQUESTED) ---
-TELEGRAM_BOT_TOKEN = "8662332284:AAFjrx-KSS4aAgrLemDO1kFoMnSw8EC5MAo"
+# --- CONFIGURATION ---
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("TELEGRAM_TOKEN")
+if not TELEGRAM_BOT_TOKEN:
+    print("⚠️ WARNING: TELEGRAM_BOT_TOKEN is not set in environment variables.")
 MY_USER_ID = int(os.getenv("AUTHORIZED_CHAT_ID", "0"))  # Still useful but can be hardcoded if needed
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
