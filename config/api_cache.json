@@ -1,47 +1,97 @@
 {
     "weather": {
-        "timestamp": 1774164531.90681,
+        "timestamp": 1774438141.5746572,
         "data": {
-            "location": "London",
-            "temperature": 3.93,
-            "description": "broken clouds",
-            "humidity": 92,
-            "wind_speed": 1.54,
-            "feels_like": 2.67
+            "location": "Hyderabad",
+            "temperature": 29.23,
+            "description": "thunderstorm",
+            "humidity": 48,
+            "wind_speed": 8.75,
+            "feels_like": 29.71
         }
     },
     "news": {
-        "timestamp": 1774164534.238546,
+        "timestamp": 1774438143.630882,
         "data": [
             {
-                "title": "Iran war latest: Trump says US considering 'winding down' war but other nations must guard Hormuz - BBC",
-                "source": "BBC News",
+                "title": "Iran pours missiles into Israel and mocks Trump's talk of joint control of strait - Yahoo News UK",
+                "source": "Yahoo Entertainment",
                 "time": "Recently"
             },
             {
-                "title": "Trump administration lifts sanctions on millions of barrels of Iranian oil - The Washington Post",
-                "source": "The Washington Post",
+                "title": "Iran targets Israel and Gulf Arab states even as Trump says US is in talks to end the war - AP News",
+                "source": "Associated Press",
                 "time": "Recently"
             },
             {
-                "title": "West Portal crash: S.F. judge sentences driver who killed family of 4 to probation - San Francisco Chronicle",
-                "source": "San Francisco Chronicle",
+                "title": "ICE agents deployed to US airports: Which airports are affected? - Al Jazeera",
+                "source": "Al Jazeera English",
                 "time": "Recently"
             },
             {
-                "title": "Oahu flash flood warning extended; North Shore areas remain under evacuation order - Honolulu Star-Advertiser",
-                "source": "Honolulu Star-Advertiser",
+                "title": "Est\u00e9e Lauder in Talks to Acquire Spain\u2019s Puig to Create Global Beauty Giant - WSJ",
+                "source": "The Wall Street Journal",
                 "time": "Recently"
             },
             {
-                "title": "Buffy the Vampire Slayer actor Nicholas Brendon dies aged 54 - BBC",
-                "source": "BBC News",
+                "title": "Live Updates: Trump calls off Strait of Hormuz ultimatum as Iran receives U.S. message from mediators - CBS News",
+                "source": "CBS News",
+                "time": "Recently"
+            },
+            {
+                "title": "Dakota Mortensen asks to be taken into custody instead of Taylor Frankie Paul in new police video: 'Why can't it be me?' - Yahoo",
+                "source": "Entertainment Weekly",
+                "time": "Recently"
+            },
+            {
+                "title": "Large oil refinery explosion near Texas coast forces residents to shelter in place - AP News",
+                "source": "Associated Press",
+                "time": "Recently"
+            },
+            {
+                "title": "Workers' job market gloom has increased dramatically over the past few years, Gallup survey finds - AP News",
+                "source": "Associated Press",
+                "time": "Recently"
+            },
+            {
+                "title": "Rangers tell Carter Baumler he made team during mound visit - ESPN",
+                "source": "ESPN",
+                "time": "Recently"
+            },
+            {
+                "title": "North Korea's Kim vows to \u2018irreversibly\u2019 cement nuclear status - Politico",
+                "source": "Politico",
+                "time": "Recently"
+            },
+            {
+                "title": "'Hannah Montana 20th Anniversary Special' LA premiere red carpet: Miley Cyrus, JoJo Siwa and more - Page Six",
+                "source": "Page Six",
+                "time": "Recently"
+            },
+            {
+                "title": "Pentagon revises rules for journalists after lawsuit loss, raising press group's ire - Axios",
+                "source": "Axios",
+                "time": "Recently"
+            },
+            {
+                "title": "2 Utah companies are quietly changing how AI actually works for real businesses - KSL.com",
+                "source": "KSL.com",
+                "time": "Recently"
+            },
+            {
+                "title": "How to watch Denmark\u2019s elections like a pro - politico.eu",
+                "source": "POLITICO.eu",
+                "time": "Recently"
+            },
+            {
+                "title": "VIDEO: \u2018Bright green fireball\u2019 flies over the Parkrose Neighborhood - KOIN.com",
+                "source": "KOIN.com",
                 "time": "Recently"
             }
         ]
     },
     "movies": {
-        "timestamp": 1774164537.6773272,
+        "timestamp": 1774438145.25307,
         "data": []
     }
 }

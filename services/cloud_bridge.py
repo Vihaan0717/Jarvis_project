@@ -12,7 +12,7 @@ load_dotenv()
 logger = get_logger("CloudBridge")
 
 # --- CONFIGURATION ---
-RENDER_URL = os.getenv("RENDER_URL", "https://jarvis-cloud-brain.onrender.com")
+RENDER_URL = "https://jarvis-cloud-brain.onrender.com"
 
 class CloudBridge:
     """

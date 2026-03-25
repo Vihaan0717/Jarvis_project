@@ -17,8 +17,8 @@ MY_USER_ID = int(os.getenv("MY_USER_ID", "0"))
 telegram_app = None
 telegram_loop = None
 
-# --- JOB QUEUE (Memory-based) ---
-job_queue = []
+# --- JOB QUEUE (Simple List) ---
+pending_jobs = []
 
 # --- FLASK SERVER (Health Check & Bridge API) ---
 app = Flask(__name__)
@@ -29,99 +29,41 @@ def health_check():
 
 @app.route('/get_jobs', methods=['GET'])
 def get_jobs():
-    """Returns the next pending job based on target (laptop/mobile)."""
-    target = request.args.get('target', 'laptop')
-    if job_queue:
-        for job in job_queue:
-            if job['status'] == 'pending' and job.get('target', 'laptop') == target:
-                return {"job": job}, 200
-    return {"job": None}, 200
+    """Returns all current jobs and clears the queue."""
+    global pending_jobs
+    jobs_to_send = list(pending_jobs)
+    pending_jobs.clear()
+    return jobs_to_send, 200
 
 @app.route('/complete_job', methods=['POST'])
 def complete_job():
-    """Marks a job as completed and notifies results via Telegram."""
-    job_id = request.json.get('job_id')
+    """Notifies results via Telegram."""
     result_data = request.json.get('result', 'Success!')
     
-    for job in job_queue:
-        if job['id'] == job_id:
-            job['status'] = 'completed'
-            job['result'] = result_data
-            
-            # --- NOTIFY USER VIA TELEGRAM ---
-            if telegram_app and telegram_loop:
-                target_name = job.get('target', 'laptop').capitalize()
-                msg = f"✅ Job #{job_id} ({job['type']}) completed on {target_name}.\nResult: {result_data}"
-                asyncio.run_coroutine_threadsafe(
-                    telegram_app.bot.send_message(chat_id=MY_USER_ID, text=msg),
-                    telegram_loop
-                )
-            
-            return {"status": "success"}, 200
-            
-    return {"status": "not_found"}, 404
+    # --- NOTIFY USER VIA TELEGRAM ---
+    if telegram_app and telegram_loop:
+        msg = f"✅ Task Completed.\nResult: {result_data}"
+        asyncio.run_coroutine_threadsafe(
+            telegram_app.bot.send_message(chat_id=MY_USER_ID, text=msg),
+            telegram_loop
+        )
+    return {"status": "success"}, 200
 
 # --- TELEGRAM BOT LOGIC ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Greets the authorized user."""
     if update.effective_user.id != MY_USER_ID:
         return
-    await update.message.reply_text("Cloud Brain Online. Ecosystem expansion complete. Monitoring Laptop & Mobile targets.")
+    await update.message.reply_text("Cloud Brain Online. Simple command queue active.")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Echoes messages or queues jobs for the authorized user."""
+    """Queues the raw user command."""
     if update.effective_user.id != MY_USER_ID:
         return
     
-    user_text = update.message.text.lower()
-    
-    # --- LAPTOP: WhatsApp Send ---
-    if user_text.startswith("send whatsapp to"):
-        try:
-            parts = user_text.split(":", 1)
-            header = parts[0].replace("send whatsapp to", "").strip()
-            message = parts[1].strip()
-            
-            job_id = str(len(job_queue) + 1)
-            job_queue.append({
-                "id": job_id, "type": "whatsapp_send", "target": "laptop",
-                "contact": header, "message": message, "status": "pending"
-            })
-            await update.message.reply_text(f"Laptop Job Queued (#{job_id}): Sending WhatsApp to {header}.")
-            return
-        except:
-            await update.message.reply_text("Error. Use: 'send whatsapp to Name: Message'")
-            return
-
-    # --- MOBILE: Termux API Actions ---
-    elif user_text.startswith("mobile"):
-        command_map = {
-            "battery": "battery",
-            "torch on": "torch_on",
-            "torch off": "torch_off",
-            "location": "location"
-        }
-        
-        found_cmd = None
-        for key, val in command_map.items():
-            if key in user_text:
-                found_cmd = val
-                break
-        
-        if found_cmd:
-            job_id = str(len(job_queue) + 1)
-            job_queue.append({
-                "id": job_id, "type": f"mobile_{found_cmd}", "target": "mobile",
-                "status": "pending"
-            })
-            await update.message.reply_text(f"Mobile Job Queued (#{job_id}): Triggering {found_cmd}...")
-            return
-        else:
-            await update.message.reply_text("Unknown Mobile Command. Available: battery, torch on, torch off, location.")
-            return
-
-    response = f"Cloud Brain received: {user_text}"
-    await update.message.reply_text(response)
+    user_text = update.message.text
+    pending_jobs.append(user_text)
+    await update.message.reply_text(f"Command Queued: {user_text}")
 
 def run_flask():
     """Starts the Flask server."""

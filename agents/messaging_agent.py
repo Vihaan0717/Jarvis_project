@@ -255,3 +255,25 @@ class MessagingAgent:
                 return "I encountered an error while scanning your inbox, Sir."
             finally:
                 await context.close()
+
+    def execute_task(self, task_text: str):
+        """Sync wrapper to parse and execute a WhatsApp task."""
+        logger.info(f"MessagingAgent: Executing task '{task_text}'")
+        if "send whatsapp to" in task_text.lower():
+            try:
+                # Format: "send whatsapp to Name: Message"
+                parts = task_text.split(":", 1)
+                contact = parts[0].lower().replace("send whatsapp to", "").strip()
+                message = parts[1].strip()
+                
+                # Execute async
+                import asyncio
+                try:
+                    loop = asyncio.get_running_loop()
+                    asyncio.run_coroutine_threadsafe(self.send_message(contact, message), loop)
+                except RuntimeError:
+                    asyncio.run(self.send_message(contact, message))
+                return True
+            except Exception as e:
+                logger.error(f"Failed to parse task: {e}")
+        return False
