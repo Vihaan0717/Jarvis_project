@@ -123,14 +123,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # We don't return OK here, we just finish the async coroutine
         # The webhook caller already got their OK, 200.
 
-def run_flask():
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
-
-async def main_bot():
+async def main_bot(loop):
     global telegram_app, telegram_loop
+    telegram_loop = loop
+    
+    if not TELEGRAM_BOT_TOKEN:
+        print("❌ CRITICAL: TELEGRAM_BOT_TOKEN is missing. Bot background loop cannot start.")
+        return
+
     telegram_app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
-    telegram_loop = asyncio.get_running_loop()
     
     telegram_app.add_handler(CommandHandler("start", start))
     telegram_app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message))
@@ -142,7 +143,16 @@ async def main_bot():
     while True:
         await asyncio.sleep(3600)
 
+def start_bot_thread():
+    """Starts the Telegram bot inside a dedicated asyncio event loop thread."""
+    bot_loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(bot_loop)
+    bot_loop.run_until_complete(main_bot(bot_loop))
+
+# Start the background bot thread globally so it runs even under Gunicorn
+threading.Thread(target=start_bot_thread, daemon=True).start()
+
 if __name__ == "__main__":
-    flask_thread = threading.Thread(target=run_flask, daemon=True)
-    flask_thread.start()
-    asyncio.run(main_bot())
+    # If run locally with `python render_jarvis.py`, start Flask manually
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
