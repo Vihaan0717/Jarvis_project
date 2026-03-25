@@ -12,7 +12,7 @@ class AnalyticalMind:
     def __init__(self):
         # Connects to Google's servers using the API key in your .env file
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash", 
+            model="gemini-2.5-flash-lite", 
             temperature=0.4
         )
         self.vault = MemoryVault() 

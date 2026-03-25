@@ -29,7 +29,7 @@ def call_gemini_llm(user_input):
     if not GEMINI_API_KEY:
         return "Sir, my Gemini API key is missing. Please check your Render environment variables."
         
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key={GEMINI_API_KEY}"
     headers = {'Content-Type': 'application/json'}
     
     # System prompt to guide JARVIS and command routing
