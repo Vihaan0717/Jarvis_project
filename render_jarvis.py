@@ -3,7 +3,7 @@ import asyncio
 import threading
 import requests
 import json
-import google.generativeai as genai
+from google import genai
 from flask import Flask, request, jsonify
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
@@ -19,10 +19,6 @@ if not TELEGRAM_BOT_TOKEN:
 MY_USER_ID = int(os.getenv("AUTHORIZED_CHAT_ID", "0"))  # Still useful but can be hardcoded if needed
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Configure SDK
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-
 # Global references
 telegram_app = None
 telegram_loop = None
@@ -35,8 +31,8 @@ def call_gemini_v2(user_input):
         if not GEMINI_API_KEY:
             return "Sir, I do not have an API key. Please set GEMINI_API_KEY in Render."
 
-        # Initialize model with 2.0 Flash
-        model = genai.GenerativeModel("models/gemini-2.0-flash")
+        # Initialize client with 2.0 Flash
+        client = genai.Client(api_key=GEMINI_API_KEY)
         
         system_instruction = (
             "You are JARVIS, an advanced AI assistant. You are currently running as a Cloud Brain on Render."
@@ -44,7 +40,10 @@ def call_gemini_v2(user_input):
         )
 
         # Generate response
-        response = model.generate_content(f"{system_instruction}\n\nUser: {user_input}")
+        response = client.models.generate_content(
+            model='gemini-2.0-flash',
+            contents=f"{system_instruction}\n\nUser: {user_input}"
+        )
         return response.text
     except Exception as e:
         print(f"❌ API Error: {e}")
