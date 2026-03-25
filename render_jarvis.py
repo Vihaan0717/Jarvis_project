@@ -61,9 +61,30 @@ def call_gemini_llm(user_input):
 # --- FLASK SERVER (Health Check & Bridge API) ---
 app = Flask(__name__)
 
-@app.route('/')
-def health_check():
-    return "Jarvis Cloud Brain: Online", 200
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/webhook', methods=['POST'])
+def webhook_handler():
+    """Handles Telegram Webhooks on multiple endpoints for maximum resilience."""
+    if request.method == 'GET':
+        return "Jarvis Cloud Brain: Online & Ready", 200
+    
+    # Process POST (Telegram Update)
+    if telegram_app and telegram_loop:
+        try:
+            update_data = request.get_json(force=True)
+            # Use Update.de_json to convert raw JSON to Telegram Update object
+            update = Update.de_json(update_data, telegram_app.bot)
+            
+            # Feed the update into the Telegram app's processing queue (Thread-Safe)
+            asyncio.run_coroutine_threadsafe(
+                telegram_app.process_update(update),
+                telegram_loop
+            )
+            return "OK", 200
+        except Exception as e:
+            print(f"Webhook Processing Error: {e}")
+            return "Error", 500
+    return "Bot Not Initialized", 503
 
 @app.route('/get_jobs', methods=['GET'])
 def get_jobs():
@@ -91,7 +112,7 @@ def complete_job():
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Greets the authorized user."""
     if update.effective_user.id != MY_USER_ID: return
-    await update.message.reply_text("Cloud Brain v2 Online. I am now capable of thinking even when your laptop is offline. How may I assist you, Sir?")
+    await update.message.reply_text("Cloud Brain v2.1 Online. Webhook dual-link active. I am standing by, Sir.")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Processes message via LLM, replies immediately, and queues commands if needed."""
@@ -101,13 +122,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f"📨 From Boss: {user_text}")
 
     # 1. Get AI Response (Thinking in the cloud)
-    # Since this involves a network tag, we run it in a thread to keep the bot responsive
     ai_response = await asyncio.to_thread(call_gemini_llm, user_text)
 
     # 2. Check for hardware commands (Smart Routing)
     if "COMMAND:" in ai_response:
         global pending_jobs
-        # Extract the command(s) and add to queue
         parts = ai_response.split("COMMAND:")
         clean_reply = parts[0].strip()
         
@@ -116,7 +135,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             pending_jobs.append(cmd)
             print(f"📥 Queued hardware command: {cmd}")
         
-        # If there's a conversational part, send it. Otherwise send a receipt.
         reply_to_send = clean_reply if clean_reply else "Recognized. I've queued that for your hardware bridge, Sir."
         await update.message.reply_text(reply_to_send)
     else:
@@ -126,6 +144,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def run_flask():
     """Starts the Flask server."""
     port = int(os.environ.get("PORT", 10000))
+    # Note: Use threaded=True for better concurrency if needed, 
+    # but run_coroutine_threadsafe handles the sync/async bridge.
     app.run(host='0.0.0.0', port=port)
 
 async def main_bot():
@@ -135,16 +155,19 @@ async def main_bot():
         print("CRITICAL: TELEGRAM_TOKEN or MY_USER_ID missing!")
         return
 
+    # Initialize the app WITHOUT polling
     telegram_app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
     telegram_loop = asyncio.get_running_loop()
     
     telegram_app.add_handler(CommandHandler("start", start))
     telegram_app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message))
     
-    print("Cloud Brain Bot polling started...")
+    print("Cloud Brain Webhook Bridge Initialized.")
     await telegram_app.initialize()
     await telegram_app.start()
-    await telegram_app.updater.start_polling()
+    
+    # We no longer call start_polling() here. 
+    # Flask will feed updates to the bot via the webhook route.
     
     while True:
         await asyncio.sleep(3600)
