@@ -53,10 +53,21 @@ def call_gemini_v2(user_input):
 # --- FLASK SERVER ---
 app = Flask(__name__)
 
+# Track if thread is started to prevent duplicates per worker
+bot_thread_started = False
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/webhook', methods=['POST'])
 def webhook_handler():
     """Handles Telegram Webhooks with a global safety net."""
+    global bot_thread_started
+    
+    # Lazy Initialization: This guarantees the thread starts INSIDE the worker process
+    # after Gunicorn has finished forking, avoiding the os.fork() thread-killing issue.
+    if not bot_thread_started:
+        threading.Thread(target=start_bot_thread, daemon=True).start()
+        bot_thread_started = True
+
     try:
         if request.method == 'GET':
             return "Jarvis v2.0 Beta: Neural Core Active.", 200
@@ -67,7 +78,7 @@ def webhook_handler():
             # Spawn background thread to process so we can return 200 OK instantly
             threading.Thread(target=process_background_update, args=(update_data,), daemon=True).start()
         else:
-            print("❌ ERROR: Webhook received, but Telegram Bot is NOT initialized! Did you set the TELEGRAM_BOT_TOKEN in Render?")
+            print("⚠️ WARNING: Telegram Bot is still initializing in the background. Please try again in a few seconds.")
             
         return "OK", 200
     except Exception as e:
