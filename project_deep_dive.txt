@@ -1,0 +1,105 @@
+PROJECT JARVIS: TECHNICAL ARCHITECTURAL DEEP DIVE
+
+Project JARVIS is a state-of-the-art, high-performance AI personal assistant featuring a 3D avatar, advanced computer vision, and a "Trinity Mind" multi-brain architecture.
+
+--------------------------------------------------------------------------------
+1. SYSTEM STRUCTURE
+The project is organized into modular layers, separating the "Brain", "Body", and "Interface".
+
+c:\Users\anger\Desktop\JARVIS_Project\
+├── avatar/                 # [FRONTEND] Three.js + VRM Model + Gesture Engine
+│   ├── index.html          # UI and dependencies (Three.js CDNs)
+│   ├── app.js              # Avatar logic (Gestures, Lipsync, Rendering)
+│   └── index.css           # Premium Styling (Glassmorphism)
+├── core/                   # [BACKEND CORE] Logic and Routing
+│   ├── orchestrator.py     # "Trinity Mind" Router (LangGraph)
+│   ├── avatar_server.py    # WebSocket bridge (Python to Browser)
+│   └── background_brain.py # Background daemon for proactive tasks
+├── services/               # [SERVICES] Specialized capabilities
+│   ├── biometric_guard.py  # Computer Vision & DeepFace (The "Eyes")
+│   ├── telegram_service.py # Remote Control & Security Alerts
+│   ├── voice_speaker.py    # TTS & Lip-sync URL generation
+│   ├── voice_listener.py   # Speech-to-Text (The "Ears")
+│   ├── action_engine.py    # OS/Web control (YouTube, Google, Media)
+│   ├── memory_vault.py     # Local knowledge storage (The "Memory")
+│   └── vision_tracker.py   # MediaPipe Face Landmarking (The "Senses")
+├── config/                 # System configuration
+└── main.py                 # Main entry point (Desktop)
+└── avatar_main.py         # Dedicated Avatar Desktop app entry
+
+--------------------------------------------------------------------------------
+2. THE TECH STACK
+We use a blend of cutting-edge Python for AI/Logical tasks and JavaScript for low-latency 3D rendering.
+
+BACKEND (PYTHON 3.10+)
+- Brain: LangGraph + LangChain + Google Gemini Pro (Google-GenerativeAI).
+- Computer Vision: DeepFace (Identification), MediaPipe (Landmarking & Tracking), OpenCV (Camera capture).
+- Communication: websockets (Real-time tracking), python-telegram-bot (Remote Auth).
+- Speech: edge-tts (Premium voices), SpeechRecognition (Google Backend).
+- OS Control: pyautogui, psutil, win32com.
+
+FRONTEND (HTML/JS)
+- Engine: Three.js (WebGL).
+- Avatar Format: VRM (Standard for 3D AI characters).
+- Library: @pixiv/three-vrm (Handles bone mapping and expressions).
+
+--------------------------------------------------------------------------------
+3. HOW JARVIS "THINKS" (THE TRINITY MIND)
+JARVIS doesn't just process text; he routes tasks through three specialized "Minds" using a graph-based orchestrator:
+
+1. Executive Mind (Local): Fast, offline-first logic for simple greetings and direct commands.
+2. Analytical Mind (Cloud): Powered by Gemini Pro for complex research, coding, and reasoning.
+3. Action Engine: Physical "hands" that can control your PC (Volume, YouTube, WhatsApp).
+
+THE ROUTING LOGIC:
+- Router Node: Scans user input for keywords like "research", "remember", "play", or "open".
+- Semantic Mapping: Input is classified as Action, Cloud, or Local.
+- Emotion Injection: Based on the response, the mind injects an Emotion (Joy, Sorrow, Angry) and a Pose (Thinking, Greeting, Sitting) before sending it to the "Eyes".
+
+--------------------------------------------------------------------------------
+4. THE "EYES": BIOMETRIC GUARD & VISION TRACKER
+JARVIS sees reality through two distinct pipelines:
+
+- THE IDENTIFIER (BIOMETRIC GUARD): Uses DeepFace (VGG-Face model) to verify if the person at the camera is the "Boss" (you).
+- THE TRACKER (VISION TRACKER): Uses MediaPipe in real-time. It doesn't just see a face; it tracks 478 landmarks to extract:
+    - Head Pose: Yaw, Pitch, Roll (Avatar follows your head movement).
+    - Eye Gaze: Where you look on the screen.
+    - Blink: Detects and mirrors your blinks.
+    - Emotions: Extracts smile and concern blendshapes to mirror your mood.
+
+--------------------------------------------------------------------------------
+5. THE "HANDS": PROCEDURAL GESTURE ENGINE
+Located in app.js, the gesture engine makes JARVIS feel alive. It isn't just playing static animations:
+
+- 8 DYNAMIC STATES: IDLE_BREATHE, TALK_GESTURE, THINKING, POINT_EXPLAIN, OPEN_HANDS, CROSSED_ARMS, SITTING, WALK.
+- MICRO-RANDOMIZATION: Every gesture has small random variations (Math.random()) so he never repeats himself exactly.
+- LIP-SYNC: Analyzes audio frequencies (FFT) to drive the 3D model's mouth shapes (A, I, U, E, O).
+- AMPLITUDE-DRIVEN HANDS: When JARVIS speaks louder/more excitedly, his hand gestures become more emphatic automatically.
+
+--------------------------------------------------------------------------------
+6. REMOTE AUTHORIZATION FLOW
+This is the security protocol that allows JARVIS to remain protected:
+1. Intruder Detected: Local face scan fails.
+2. Telegram Alert: JARVIS snaps a photo and sends it to your Telegram with Approve/Deny buttons.
+3. Shadowing: If a guest is approved, JARVIS mirrors the entire conversation to your phone so you can monitor what they are asking.
+
+--------------------------------------------------------------------------------
+SUMMARY OF LIBRARIES & DEPENDENCIES
+
+CATEGORY: AI/Orchestration
+LIBRARIES: langchain, langgraph, google-generativeai
+
+CATEGORY: Vision / Tracking
+LIBRARIES: deepface, mediapipe, opencv-python
+
+CATEGORY: Connectivity
+LIBRARIES: websockets, python-telegram-bot, aiohttp
+
+CATEGORY: Audio/Voice
+LIBRARIES: edge-tts, speechrecognition, pygame, gtts
+
+CATEGORY: UI/Frontend
+LIBRARIES: Three.js, VRM, PyQt6 (Desktop Shell)
+
+CATEGORY: Utilities
+LIBRARIES: pyautogui, psutil, python-dotenv, pillow

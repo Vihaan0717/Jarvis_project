@@ -1,0 +1,23 @@
+{
+  "name": "jarvis-holographic-engine",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.32",
+    "@types/three": "^0.183.1",
+    "cannon-es": "^0.20.0",
+    "dat.gui": "^0.7.9",
+    "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.13",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}

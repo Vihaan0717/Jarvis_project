@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Set the document title to the name of your application -->
+    <title>JARVIS-X | Advanced OS Assistant</title>
+    <meta name="description" content="The Ultimate OS Intelligence System" />
+    <meta name="author" content="JARVIS-X Team" />
+
+    <meta property="og:title" content="JARVIS-X | Advanced OS Assistant" />
+    <meta property="og:description" content="The Ultimate OS Intelligence System" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JARVIS-X | Advanced OS Assistant" />
+    <meta name="twitter:description" content="The Ultimate OS Intelligence System" />
+    <meta name="twitter:image" content="/og-image.png" />
+  </head>
+
+  <body>
+    <div id="error-log" style="color: red; font-family: monospace; padding: 20px; z-index: 9999; position: absolute;"></div>
+    <script>
+      window.onerror = function(msg, source, lineno, colno, error) {
+        var str = "Error: " + msg + "<br/>Source: " + source + ":" + lineno + ":" + colno;
+        if (error && error.stack) str += "<br/>Stack: " + error.stack;
+        document.getElementById('error-log').innerHTML += str + "<br/><br/>";
+        return false;
+      };
+      window.addEventListener('unhandledrejection', function(event) {
+        document.getElementById('error-log').innerHTML += "Promise Error: " + event.reason + "<br/><br/>";
+      });
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

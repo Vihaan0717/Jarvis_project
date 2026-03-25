@@ -1,0 +1,8 @@
+websockets==16.0
+mediapipe==0.10.32
+opencv-python==4.13.0.92
+PyQt6==6.10.2
+PyQt6-WebEngine==6.10.0
+fastapi==0.135.1
+uvicorn==0.41.0
+# Optional: face_recognition requires dlib/CMake and may not install on Python 3.13.

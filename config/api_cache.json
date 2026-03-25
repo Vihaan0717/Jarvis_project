@@ -1,0 +1,47 @@
+{
+    "weather": {
+        "timestamp": 1774164531.90681,
+        "data": {
+            "location": "London",
+            "temperature": 3.93,
+            "description": "broken clouds",
+            "humidity": 92,
+            "wind_speed": 1.54,
+            "feels_like": 2.67
+        }
+    },
+    "news": {
+        "timestamp": 1774164534.238546,
+        "data": [
+            {
+                "title": "Iran war latest: Trump says US considering 'winding down' war but other nations must guard Hormuz - BBC",
+                "source": "BBC News",
+                "time": "Recently"
+            },
+            {
+                "title": "Trump administration lifts sanctions on millions of barrels of Iranian oil - The Washington Post",
+                "source": "The Washington Post",
+                "time": "Recently"
+            },
+            {
+                "title": "West Portal crash: S.F. judge sentences driver who killed family of 4 to probation - San Francisco Chronicle",
+                "source": "San Francisco Chronicle",
+                "time": "Recently"
+            },
+            {
+                "title": "Oahu flash flood warning extended; North Shore areas remain under evacuation order - Honolulu Star-Advertiser",
+                "source": "Honolulu Star-Advertiser",
+                "time": "Recently"
+            },
+            {
+                "title": "Buffy the Vampire Slayer actor Nicholas Brendon dies aged 54 - BBC",
+                "source": "BBC News",
+                "time": "Recently"
+            }
+        ]
+    },
+    "movies": {
+        "timestamp": 1774164537.6773272,
+        "data": []
+    }
+}
