@@ -1,3 +1,5 @@
-2026/03/25-16:59:10.817 5190 Reusing MANIFEST C:\Users\anger\Desktop\JARVIS_Project\config\whatsapp_user_profile\Default\Local Storage\leveldb/MANIFEST-000001
-2026/03/25-16:59:10.855 5190 Recovering log #4
-2026/03/25-16:59:10.858 5190 Reusing old log C:\Users\anger\Desktop\JARVIS_Project\config\whatsapp_user_profile\Default\Local Storage\leveldb/000004.log 
+2026/03/25-17:28:01.525 22f0 Reusing MANIFEST C:\Users\anger\Desktop\JARVIS_Project\config\whatsapp_user_profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/03/25-17:28:01.569 22f0 Recovering log #4
+2026/03/25-17:28:01.571 22f0 Level-0 table #6: started
+2026/03/25-17:28:01.580 22f0 Level-0 table #6: 19088 bytes OK
+2026/03/25-17:28:01.584 22f0 Delete type=0 #4

@@ -36,4 +36,5 @@ def synthesize():
     return send_file(output_path, mimetype="audio/wav")
 
 if __name__ == "__main__":
-    app.run(port=8768)
+    # Explicitly listen on all interfaces so the main engine can connect
+    app.run(host="0.0.0.0", port=8768)

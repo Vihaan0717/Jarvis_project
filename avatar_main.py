@@ -84,8 +84,16 @@ def jarvis_avatar_worker():
     # 4. Start Voice Cloner Server (XTTSv2)
     try:
         logger.info("Starting local Voice Cloner Server (XTTSv2)...")
-        subprocess.Popen([sys.executable, "services/voice_cloner_server.py"], 
-                        creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == 'nt' else 0)
+        # Use the specialized .venv_voice environment to avoid torch/TTS dependency issues
+        voice_venv_python = os.path.join(os.getcwd(), ".venv_voice", "Scripts", "python.exe")
+        
+        if os.path.exists(voice_venv_python):
+            subprocess.Popen([voice_venv_python, "services/voice_cloner_server.py"], 
+                            creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == 'nt' else 0)
+        else:
+            logger.warning("Dedicated .venv_voice not found. Falling back to system python.")
+            subprocess.Popen([sys.executable, "services/voice_cloner_server.py"], 
+                            creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == 'nt' else 0)
         time.sleep(8)
     except Exception as e:
         logger.error(f"Failed to start Voice Cloner Server: {e}")

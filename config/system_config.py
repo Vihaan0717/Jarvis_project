@@ -20,6 +20,7 @@ class JarvisConfig:
     
     # 3. System Settings
     ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+    OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
     LOCAL_MODEL_NAME = "llama3.2"
     
     @classmethod
