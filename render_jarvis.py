@@ -64,7 +64,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/webhook', methods=['POST'])
 def webhook_handler():
-    """Handles Telegram Webhooks on multiple endpoints for maximum resilience."""
+    """Handles Telegram Webhooks by spawning a background thread to prevent timeouts."""
     if request.method == 'GET':
         return "Jarvis Cloud Brain: Online & Ready", 200
     
@@ -72,19 +72,35 @@ def webhook_handler():
     if telegram_app and telegram_loop:
         try:
             update_data = request.get_json(force=True)
-            # Use Update.de_json to convert raw JSON to Telegram Update object
-            update = Update.de_json(update_data, telegram_app.bot)
             
-            # Feed the update into the Telegram app's processing queue (Thread-Safe)
-            asyncio.run_coroutine_threadsafe(
-                telegram_app.process_update(update),
-                telegram_loop
-            )
-            return "OK", 200
+            # CRITICAL: Spawn a background thread for ALL processing
+            # This allows Flask to return 200 OK instantly to Telegram/Render
+            threading.Thread(target=process_background_update, args=(update_data,), daemon=True).start()
+            
+            return "OK", 200 # Immediate success response
         except Exception as e:
-            print(f"Webhook Processing Error: {e}")
-            return "Error", 500
+            print(f"⚠️ Webhook Error: {e}")
+            return "OK", 200 # Return 200 anyway to stop Telegram retries
+            
     return "Bot Not Initialized", 503
+
+def process_background_update(update_data):
+    """Background thread worker to process the Telegram update without blocking Flask."""
+    global telegram_app, telegram_loop
+    try:
+        # Convert raw JSON to Update object
+        update = Update.de_json(update_data, telegram_app.bot)
+        
+        # Schedule the update processing on the bot's event loop
+        # and wait for it to complete or timeout (independent of the Flask request)
+        future = asyncio.run_coroutine_threadsafe(
+            telegram_app.process_update(update),
+            telegram_loop
+        )
+        # We wait up to 60s for the background "thinking" to finish
+        future.result(timeout=60) 
+    except Exception as e:
+        print(f"❌ Background Process Error: {e}")
 
 @app.route('/get_jobs', methods=['GET'])
 def get_jobs():
@@ -112,7 +128,7 @@ def complete_job():
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Greets the authorized user."""
     if update.effective_user.id != MY_USER_ID: return
-    await update.message.reply_text("Cloud Brain v2.1 Online. Webhook dual-link active. I am standing by, Sir.")
+    await update.message.reply_text("Cloud Brain v2.2 Online. Background threading active. Any request is now immediately acknowledged, Sir.")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Processes message via LLM, replies immediately, and queues commands if needed."""
@@ -122,7 +138,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f"📨 From Boss: {user_text}")
 
     # 1. Get AI Response (Thinking in the cloud)
-    ai_response = await asyncio.to_thread(call_gemini_llm, user_text)
+    # We wrap this in a localized try/except to prevent thread crashes
+    try:
+        ai_response = await asyncio.to_thread(call_gemini_llm, user_text)
+    except Exception as e:
+        logger_err = f"AI Core Exception: {e}"
+        print(logger_err)
+        await update.message.reply_text("Sir, I encountered an internal error in my neural core. Please check my logs.")
+        return
 
     # 2. Check for hardware commands (Smart Routing)
     if "COMMAND:" in ai_response:
