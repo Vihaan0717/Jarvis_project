@@ -4,6 +4,10 @@ from telegram import Update, Bot, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, CallbackQueryHandler, filters
 from config.system_config import JarvisConfig
 
+# Silence noisy network stack traces from python-telegram-bot
+logging.getLogger("telegram.ext.Updater").setLevel(logging.CRITICAL)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
 logger = logging.getLogger("TelegramService")
 
 class TelegramService:
@@ -100,7 +104,7 @@ class TelegramService:
             logger.warning("Telegram authorization request TIMED OUT (60s).")
             return False
         except Exception as e:
-            logger.error(f"Failed to send authorization request to Telegram: {e}", exc_info=True)
+            logger.error(f"Failed to send authorization request to Telegram: {type(e).__name__} - {e}")
             return False
 
     async def _button_callback(self, update: Update, context: ContextTypes.DEFAULT_TYPE):

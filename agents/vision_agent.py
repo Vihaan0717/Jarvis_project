@@ -26,7 +26,7 @@ class VisionTracker:
         
         # Jitter reduction: Store last values for low-pass filtering
         self.last_pose = {"pitch": 0.0, "yaw": 0.0, "roll": 0.0}
-        self.smoothing_factor = 0.3 # Higher = less delay, Lower = smoother
+        self.smoothing_factor = 0.1 # Lower = smoother to avoid high-FPS shaking
         
         self.cap = None
         self.is_running = False
@@ -103,9 +103,11 @@ class VisionTracker:
                 self._last_warning_time = current_time
             return None
 
-        # MediaPipe requires RGB images
+        # Store ORIGINAL non-mirrored frame for Biometrics (better deepface accuracy)
+        self.last_frame = image.copy() 
+        
+        # MediaPipe requires RGB images and flipping for a mirror effect on the Avatar
         image = cv2.flip(image, 1)
-        self.last_frame = image.copy() # Store for shared access (flipped)
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_image)
 

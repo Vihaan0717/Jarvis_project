@@ -331,7 +331,7 @@ export class VRMAnimationManager {
         ? 0.3
         : isTransitioning
           ? Math.min(1, safeDelta * TRANSITION_SPEED * 2)
-          : (1.0 - Math.exp(-15 * safeDelta));
+          : (1.0 - Math.exp(-6 * safeDelta)); // Reduced exponential factor from 15 to 6 to eliminate 30fps high-frequency head shaking
       node.quaternion.slerp(targetQ, slerpFactor);
     });
 

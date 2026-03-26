@@ -24,6 +24,16 @@ logger = get_logger("AvatarMain_Desktop")
 def request_app_quit():
     """Simple helper to exit the program."""
     logger.info("Requesting system shutdown...")
+    try:
+        from PyQt6.QtWidgets import QApplication
+        from PyQt6.QtCore import QMetaObject, Qt
+        app = QApplication.instance()
+        if app:
+            logger.info("Signaling UI thread to quit...")
+            QMetaObject.invokeMethod(app, "quit", Qt.ConnectionType.QueuedConnection)
+            return
+    except Exception:
+        pass
     os._exit(0)
 
 def _start_static_server(port: int = 8766):

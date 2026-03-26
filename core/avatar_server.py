@@ -143,13 +143,22 @@ class AvatarServer:
                 
                 if self.biometric_guard:
                     current_time = time.time()
-                    if data.get("detected") and (current_time - self.biometric_guard.last_verification_time > 60):
+                    last_check = getattr(self.biometric_guard, 'last_scan_time', self.biometric_guard.last_verification_time)
+                    if data.get("detected") and (current_time - last_check > 60):
+                        # Prevent duplicate checks instantly
+                        self.biometric_guard.last_scan_time = current_time
+                        
                         # Trigger UI Scan Animation
                         asyncio.run_coroutine_threadsafe(
                             self._broadcast({"type": "BIOMETRIC_EVENT", "status": "SCANNING"}), 
                             self.loop
                         )
-                        self.biometric_guard.verify_identity(frame=self.tracker.last_frame)
+                        # Run the slow verification in a separate thread so tracking doesn't freeze
+                        threading.Thread(
+                            target=self.biometric_guard.verify_identity,
+                            kwargs={"frame": self.tracker.last_frame},
+                            daemon=True
+                        ).start()
             
             time.sleep(1.0 / 30.0)
         self.tracker.stop_camera()

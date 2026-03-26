@@ -1,91 +1,91 @@
 {
     "weather": {
-        "timestamp": 1774438141.5746572,
+        "timestamp": 1774510857.593888,
         "data": {
             "location": "Hyderabad",
-            "temperature": 29.23,
-            "description": "thunderstorm",
-            "humidity": 48,
-            "wind_speed": 8.75,
-            "feels_like": 29.71
+            "temperature": 35.23,
+            "description": "haze",
+            "humidity": 28,
+            "wind_speed": 2.57,
+            "feels_like": 34.59
         }
     },
     "news": {
-        "timestamp": 1774438143.630882,
+        "timestamp": 1774510859.63981,
         "data": [
             {
-                "title": "Iran pours missiles into Israel and mocks Trump's talk of joint control of strait - Yahoo News UK",
-                "source": "Yahoo Entertainment",
-                "time": "Recently"
-            },
-            {
-                "title": "Iran targets Israel and Gulf Arab states even as Trump says US is in talks to end the war - AP News",
-                "source": "Associated Press",
-                "time": "Recently"
-            },
-            {
-                "title": "ICE agents deployed to US airports: Which airports are affected? - Al Jazeera",
-                "source": "Al Jazeera English",
-                "time": "Recently"
-            },
-            {
-                "title": "Est\u00e9e Lauder in Talks to Acquire Spain\u2019s Puig to Create Global Beauty Giant - WSJ",
+                "title": "Iran War Live Updates: Mediators Aim for U.S.-Iran Meeting by Thursday - WSJ",
                 "source": "The Wall Street Journal",
                 "time": "Recently"
             },
             {
-                "title": "Live Updates: Trump calls off Strait of Hormuz ultimatum as Iran receives U.S. message from mediators - CBS News",
-                "source": "CBS News",
+                "title": "New \u2018Lord of the Rings\u2019 Movie From Stephen Colbert and His Son in Development at Warner Bros. - Variety",
+                "source": "Variety",
                 "time": "Recently"
             },
             {
-                "title": "Dakota Mortensen asks to be taken into custody instead of Taylor Frankie Paul in new police video: 'Why can't it be me?' - Yahoo",
-                "source": "Entertainment Weekly",
+                "title": "Senate Republicans pitch deal to end DHS shutdown, but Trump isn\u2019t sold - The Washington Post",
+                "source": "The Washington Post",
                 "time": "Recently"
             },
             {
-                "title": "Large oil refinery explosion near Texas coast forces residents to shelter in place - AP News",
-                "source": "Associated Press",
+                "title": "Army paratroopers ordered to Middle East as U.S. weighs next move in Iran conflict - The Washington Post",
+                "source": "The Washington Post",
                 "time": "Recently"
             },
             {
-                "title": "Workers' job market gloom has increased dramatically over the past few years, Gallup survey finds - AP News",
-                "source": "Associated Press",
+                "title": "Oil price slides as Trump talks up Iran peace negotiations - BBC",
+                "source": "BBC News",
                 "time": "Recently"
             },
             {
-                "title": "Rangers tell Carter Baumler he made team during mound visit - ESPN",
-                "source": "ESPN",
+                "title": "U.S. Sends Iran 15-Point Plan to End War - WSJ",
+                "source": "The Wall Street Journal",
                 "time": "Recently"
             },
             {
-                "title": "North Korea's Kim vows to \u2018irreversibly\u2019 cement nuclear status - Politico",
-                "source": "Politico",
+                "title": "Candidates for UNC's Next Basketball Coach - 247Sports",
+                "source": "247Sports",
                 "time": "Recently"
             },
             {
-                "title": "'Hannah Montana 20th Anniversary Special' LA premiere red carpet: Miley Cyrus, JoJo Siwa and more - Page Six",
-                "source": "Page Six",
+                "title": "Meta Offers Top Execs Stock Options for First Time Since IPO - Bloomberg.com",
+                "source": "Bloomberg",
                 "time": "Recently"
             },
             {
-                "title": "Pentagon revises rules for journalists after lawsuit loss, raising press group's ire - Axios",
-                "source": "Axios",
-                "time": "Recently"
-            },
-            {
-                "title": "2 Utah companies are quietly changing how AI actually works for real businesses - KSL.com",
-                "source": "KSL.com",
-                "time": "Recently"
-            },
-            {
-                "title": "How to watch Denmark\u2019s elections like a pro - politico.eu",
+                "title": "Survivor, Denmark: Mette Frederiksen clings on \u2014 offering lessons for Europe\u2019s left - politico.eu",
                 "source": "POLITICO.eu",
                 "time": "Recently"
             },
             {
-                "title": "VIDEO: \u2018Bright green fireball\u2019 flies over the Parkrose Neighborhood - KOIN.com",
-                "source": "KOIN.com",
+                "title": "Emily Osment Addresses Absence From \u2018Hannah Montana\u2019 Anniversary Special - Deadline",
+                "source": "Deadline",
+                "time": "Recently"
+            },
+            {
+                "title": "Democrat wins Florida house district containing Trump's Mar-a-Lago estate - BBC",
+                "source": "BBC News",
+                "time": "Recently"
+            },
+            {
+                "title": "\u2018NCIS\u2019 Shocker! Longtime Star Speaks out About Exit After 18 Seasons - TV Insider",
+                "source": "TVInsider",
+                "time": "Recently"
+            },
+            {
+                "title": "OpenAI will shutter Sora video app - Axios",
+                "source": "Axios",
+                "time": "Recently"
+            },
+            {
+                "title": "Green fireball captured on dashcam video as a meteor streaks across the Pacific Northwest sky - abcnews.com",
+                "source": "Abcnews.com",
+                "time": "Recently"
+            },
+            {
+                "title": "Prosecutor conceded lack of criminal evidence in Federal Reserve investigation, transcript shows - AP News",
+                "source": "Associated Press",
                 "time": "Recently"
             }
         ]

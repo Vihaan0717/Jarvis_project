@@ -21,6 +21,7 @@ class BiometricGuard:
         self.is_logged_in = False
         self.login_time = None
         self.last_verification_time = 0
+        self.last_scan_time = 0
         self.last_failed_alert_time = 0 # To throttle intruder alerts
         self._lock = threading.Lock() # Prevent concurrent scans
         
@@ -52,6 +53,13 @@ class BiometricGuard:
     def verify_identity(self, frame=None) -> bool:
         """Takes a photo with the webcam and verifies if it is the Boss."""
         with self._lock: # Ensure only one scan happens at a time
+            now = time.time()
+            # Prevent queued multithreading scans from rejecting a login that just finished via Telegram authorization
+            if now - self.last_verification_time <= 15:
+                logger.info("Bypassing concurrent scan: User was verified just moments ago.")
+                return True
+                
+            self.last_scan_time = now
             # --- EMERGENCY BYPASS CHECK ---
             bypass = os.getenv("SECURITY_BYPASS", "False").lower() == "true"
             if bypass:
