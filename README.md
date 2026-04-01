@@ -1,46 +1,79 @@
-# JARVIS Project Documentation
+# JARVIS Project
 
-## Overview
-JARVIS is an intelligent personal assistant designed to help users with various tasks, automate processes, and provide immediate access to information.
+## Project Overview
+JARVIS (Just A Rather Very Intelligent System) is an AI project that aims to autonomously interact with users and manage various tasks effectively. It functions as a personal assistant designed to automate daily activities and provide insights based on user preferences.
 
 ## Features
-- Voice recognition and processing
-- Integration with various APIs
-- Task scheduling and reminders
-- Personalized user experience
-- Natural language understanding and processing
+- Voice recognition
+- Automated task management
+- Smart reminders
+- Natural language processing
+- User preference learning
 
 ## Architecture
-JARVIS is built on a microservices architecture consisting of multiple services communicating through REST APIs. This enables scalability and allows each service to be developed independently.
+The architecture of JARVIS is divided into several modules, including:
+- **Voice Interface**: Handles user interactions through voice commands.
+- **Task Manager**: Automates and schedules tasks based on user inputs.
+- **Data Processor**: Analyzes user data to provide insights.
 
 ## Tech Stack
-- **Frontend:** React.js
-- **Backend:** Node.js, Express
-- **Database:** MongoDB
-- **Voice Recognition:** Web Speech API
-- **Hosting:** AWS
+- **Programming Languages**: Python, JavaScript
+- **Frameworks**: Flask, React
+- **Database**: MongoDB
+- **APIs**: Google Voice API, OpenAI API
 
-## Getting Started Guide
+## Installation Instructions
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/Vihaan0717/Jarvis_project.git
+   ```
+2. Navigate to the project directory:
+   ```bash
    cd Jarvis_project
    ```
-2. Install dependencies:
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
    ```
-   npm install
-   ```
-3. Run the application:
-   ```
-   npm start
+4. Run the application:
+   ```bash
+   python app.py
    ```
 
 ## Usage
-To interact with JARVIS, simply speak your command after the prompt. You can say things like:
-- "What is the weather today?"
-- "Set a reminder for tomorrow at 9 AM."
+To interact with JARVIS, use voice commands such as:
+- "JARVIS, set a reminder for tomorrow."
+- "JARVIS, what’s the weather today?"
+
+## Trinity Mind System
+The Trinity Mind System is an integral part of JARVIS that integrates emotional intelligence, decision-making capabilities, and a learning mechanism.
+
+## Vision Pipeline
+The vision pipeline processes visual inputs to help JARVIS interpret and respond to user queries regarding visual data.
+
+## Configuration
+Modify the configuration settings in `config.py` to customize JARVIS according to your preferences.
+
+## Advanced Features
+- Social media integration
+- Customizable task workflows
+- Machine learning-driven behavior prediction
 
 ## Troubleshooting
-- Ensure your microphone is properly configured and recognized by the application.
-- If JARVIS does not respond, check for network connectivity issues.
-- For any persistent bugs, check the logs for error messages and report them on the issue tracker.
+1. **Issue**: JARVIS not recognizing voice commands.
+   **Solution**: Ensure your microphone is connected and properly configured.
+2. **Issue**: Application crashes on startup.
+   **Solution**: Check the installation of dependencies and restore missing packages.
+
+## Contributing Guidelines
+We welcome contributions! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Submit a pull request.
+
+## Roadmap
+- Q2 2026: Implementation of advanced NLP features.
+- Q3 2026: Launch of the mobile application version.
+- Q4 2026: Community-driven feature development.
+
+---
